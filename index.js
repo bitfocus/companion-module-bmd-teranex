@@ -1,4 +1,4 @@
-// BlackMagic Design Teranex 
+// BlackMagic Design Teranex
 
 var tcp = require('../../tcp');
 var instance_skel = require('../../instance_skel');
@@ -26,6 +26,73 @@ function instance(system, id, config) {
 		{ id: 'AES', label: 'AES' },
 		{ id: 'RCA', label: 'RCA' },
 		{ id: 'DB25', label: 'DB25 (Analog)' }
+	];
+
+	// Teranex AV and Teranex Express
+	self.avex_output_formats = [
+		{ id: '525i59.94', label: '525i 59.94hz NTSC' },
+		{ id: '625i50', label: '625i 50hz PAL' },
+		{ id: '720p50', label: '720p 50hz' },
+		{ id: '720p59.94', label: '720p 59.94hz' },
+		{ id: '720p60', label: '720p 60hz' },
+		{ id: '1080p23.98', label: '1080p 23.98hz' },
+		{ id: '1080PsF23.98', label: '1080PsF 23.98hz' },
+		{ id: '1080p24', label: '1080p 24hz' },
+		{ id: '1080PsF24', label: '1080PsF 24hz' },
+		{ id: '1080p25', label: '1080p 25hz' },
+		{ id: '1080PsF25', label: '1080PsF 25hz' },
+		{ id: '1080p29.97', label: '1080p 29.97hz' },
+		{ id: '1080PsF29.97', label: '1080PsF 29.97hz' },
+		{ id: '1080p30', label: '1080p 30hz' },
+		{ id: '1080PsF30', label: '1080PsF 30hz' },
+		{ id: '1080i50', label: '1080i 50hz' },
+		{ id: '1080p50', label: '1080p 50hz' },
+		{ id: '1080i59.94', label: '1080i 59.94hz' },
+		{ id: '1080p59.94', label: '1080p 59.94hz' },
+		{ id: '1080i60', label: '1080i 50hz' },
+		{ id: '1080p60', label: '1080p 50hz' },
+		{ id: '1080p59.94', label: '1080p 59.94hz' },
+		{ id: '2K DCI 23.98p', label: '2K DCI 23.98hz' },
+		{ id: '2K DCI 23.98PsF', label: '2K DCI PsF 23.98hz' },
+		{ id: '2K DCI 24p', label: '2K DCI 24hz' },
+		{ id: '2K DCI 24PsF', label: '2K DCI PsF 24hz' },
+		{ id: '2160p23.98', label: '2160p 23.98hz' },
+		{ id: '2160p24', label: '2160p 24hz' },
+		{ id: '2160p25', label: '2160p 25hz' },
+		{ id: '2160p29.97', label: '2160p 29.97hz' },
+		{ id: '2160p30', label: '2160p 30hz' },
+		{ id: '2160p50', label: '2160p 50hz' },
+		{ id: '2160p59.94', label: '2160p 59.94hz' },
+		{ id: '2160p60', label: '2160p 60hz' }
+	];
+
+	self.t2d3d_output_formats = [
+		{ id: '525i59.94', label: '525i 59.94hz NTSC' },
+		{ id: '625i50', label: '625i 50hz PAL' },
+		{ id: '720p50', label: '720p 50hz' },
+		{ id: '720p59.94', label: '720p 59.94hz' },
+		{ id: '720p60', label: '720p 60hz' },
+		{ id: '1080p23.98', label: '1080p 23.98hz' },
+		{ id: '1080PsF23.98', label: '1080PsF 23.98hz' },
+		{ id: '1080p24', label: '1080p 24hz' },
+		{ id: '1080PsF24', label: '1080PsF 24hz' },
+		{ id: '1080p25', label: '1080p 25hz' },
+		{ id: '1080PsF25', label: '1080PsF 25hz' },
+		{ id: '1080p29.97', label: '1080p 29.97hz' },
+		{ id: '1080PsF29.97', label: '1080PsF 29.97hz' },
+		{ id: '1080p30', label: '1080p 30hz' },
+		{ id: '1080PsF30', label: '1080PsF 30hz' },
+		{ id: '1080i50', label: '1080i 50hz' },
+		{ id: '1080p50', label: '1080p 50hz' },
+		{ id: '1080i59.94', label: '1080i 59.94hz' },
+		{ id: '1080p59.94', label: '1080p 59.94hz' },
+		{ id: '1080i60', label: '1080i 50hz' },
+		{ id: '1080p60', label: '1080p 50hz' },
+		{ id: '1080p59.94', label: '1080p 59.94hz' },
+		{ id: '2K DCI 23.98p', label: '2K DCI 23.98hz' },
+		{ id: '2K DCI 23.98PsF', label: '2K DCI PsF 23.98hz' },
+		{ id: '2K DCI 24p', label: '2K DCI 24hz' },
+		{ id: '2K DCI 24PsF', label: '2K DCI PsF 24hz' }
 	];
 
 	// super-constructor
