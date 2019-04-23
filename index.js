@@ -94,6 +94,16 @@ function instance(system, id, config) {
 		{ id: '2K DCI 24p', label: '2K DCI 24hz' },
 		{ id: '2K DCI 24PsF', label: '2K DCI PsF 24hz' }
 	];
+	
+		
+	self.preset_sources = [
+		{ id: '1', label: 'Preset 1' },
+		{ id: '2', label: 'Preset 2' },
+		{ id: '3', label: 'Preset 3' },
+		{ id: '4', label: 'Preset 4' },
+		{ id: '5', label: 'Preset 5' },
+		{ id: '6', label: 'Preset 6' }
+	];
 
 	// super-constructor
 	instance_skel.apply(this, arguments);
@@ -532,8 +542,20 @@ instance.prototype.actions = function() {
 					choices: self.audio_sources
 				}
 			]
+		},
+		
+		'recall_preset': {
+			label: 'Recall preset',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Preset',
+					id: 'source',
+					default: '1',
+					choices: self.preset_sources
+				}
+			]
 		}
-
 	});
 }
 
@@ -548,6 +570,9 @@ instance.prototype.action = function(action) {
 	else if (action.action === 'set_audio') {
 		cmd = "VIDEO INPUT:\nAudio source: " + action.options.source + "\n\n";
 	}
+	else if (action.action === 'recall_preset') {
+		cmd = "PRESET:\nRecall:" + action.options.source + "\n\n";
+		}
 
 	if (cmd !== undefined) {
 		if (self.socket !== undefined && self.socket.connected) {
@@ -555,8 +580,8 @@ instance.prototype.action = function(action) {
 		} else {
 			debug('Socket not connected :(');
 		}
-
 	}
+	
 };
 
 instance_skel.extendedBy(instance);
