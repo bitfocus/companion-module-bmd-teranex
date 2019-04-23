@@ -6,3 +6,4 @@ This module will connect to any Blackmagic Design Teranex device.
 
 * Video source
 * Audio source
+* Recall presets
