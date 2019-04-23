@@ -94,8 +94,8 @@ function instance(system, id, config) {
 		{ id: '2K DCI 24p', label: '2K DCI 24hz' },
 		{ id: '2K DCI 24PsF', label: '2K DCI PsF 24hz' }
 	];
-	
 		
+	// Select Terenex preset
 	self.preset_sources = [
 		{ id: '1', label: 'Preset 1' },
 		{ id: '2', label: 'Preset 2' },
@@ -103,6 +103,24 @@ function instance(system, id, config) {
 		{ id: '4', label: 'Preset 4' },
 		{ id: '5', label: 'Preset 5' },
 		{ id: '6', label: 'Preset 6' }
+	];
+	
+	// Select Terenex Test Pattern
+	self.testPattern = [
+		{ id: 'None', label: 'Off' },
+		{ id: 'SMPTEBars', label: 'SMPTE 75%' },
+		{ id: 'Bars', label: 'Colorbar 75%' },
+		{ id: 'Black', label: 'Black' },
+		{ id: 'Grid', label: 'Grid' },
+		{ id: 'Multiburst', label: 'Res Chart' }
+	];
+	
+	// Select Output Display
+	self.outputDisplay = [
+		{ id: 'Input', label: 'Input' },
+		{ id: 'Freeze', label: 'Freeze'},
+		{ id: 'Black', label: 'Black' },
+		{ id: 'Still', label: 'Still' }
 	];
 
 	// super-constructor
@@ -383,7 +401,6 @@ instance.prototype.update_variables = function (system) {
 		]
 	};
 
-
 	self.setFeedbackDefinitions(feedbacks);
 };
 
@@ -555,6 +572,32 @@ instance.prototype.actions = function() {
 					choices: self.preset_sources
 				}
 			]
+		},
+		
+		'test_pattern': {
+			label: 'Test Pattern',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Test Pattern',
+					id: 'testPattern',
+					default: 'None',
+					choices: self.testPattern
+				}
+			]
+		},
+		
+		'output_display': {
+			label: 'Output display',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Output display',
+					id: 'outputDisplay',
+					default: 'Input',
+					choices: self.outputDisplay
+				}
+			]
 		}
 	});
 }
@@ -573,6 +616,12 @@ instance.prototype.action = function(action) {
 	else if (action.action === 'recall_preset') {
 		cmd = "PRESET:\nRecall:" + action.options.source + "\n\n";
 		}
+	else if (action.action === 'test_pattern') {
+		cmd = "TEST PATTERN:\nOutput:" + action.options.testPattern + "\n\n";
+		}
+	else if (action.action === 'output_display') {
+		cmd = "VIDEO OUTPUT:\nOutput option:" + action.options.outputDisplay + "\n\n";
+		}	
 
 	if (cmd !== undefined) {
 		if (self.socket !== undefined && self.socket.connected) {
