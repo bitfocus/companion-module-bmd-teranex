@@ -544,8 +544,8 @@ instance.prototype.actions = function() {
 			]
 		},
 		
-		'set_preset': {
-			label: 'Select preset',
+		'recall_preset': {
+			label: 'Recall preset',
 			options: [
 				{
 					type: 'dropdown',
@@ -556,7 +556,6 @@ instance.prototype.actions = function() {
 				}
 			]
 		}
-
 	});
 }
 
@@ -571,7 +570,7 @@ instance.prototype.action = function(action) {
 	else if (action.action === 'set_audio') {
 		cmd = "VIDEO INPUT:\nAudio source: " + action.options.source + "\n\n";
 	}
-	else if (action.action === 'set_preset') {
+	else if (action.action === 'recall_preset') {
 		cmd = "PRESET:\nRecall:" + action.options.source + "\n\n";
 		}
 
@@ -581,17 +580,8 @@ instance.prototype.action = function(action) {
 		} else {
 			debug('Socket not connected :(');
 		}
-
 	}
 	
-/*
-	if (action.action === 'set_preset') {
-		cmd = "PRESET:\nRecall:" + action.options.source + "\n\n";
-		}
-		else {
-			debug('Check presets :(');
-	}
-*/
 };
 
 instance_skel.extendedBy(instance);
