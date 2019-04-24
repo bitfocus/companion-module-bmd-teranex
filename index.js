@@ -227,11 +227,13 @@ instance.prototype.init_tcp = function() {
 		self.socket.on('data', function (chunk) {
 			var i = 0, line = '', offset = 0;
 			receivebuffer += chunk;
+
 			while ( (i = receivebuffer.indexOf('\n', offset)) !== -1) {
 				line = receivebuffer.substr(offset, i - offset);
 				offset = i + 1;
 				self.socket.emit('receiveline', line.toString());
 			}
+
 			receivebuffer = receivebuffer.substr(offset);
 		});
 
@@ -240,11 +242,9 @@ instance.prototype.init_tcp = function() {
 			if (self.command === null && line.match(/:/) ) {
 				self.command = line;
 			}
-
 			else if (self.command !== null && line.length > 0) {
 				self.stash.push(line.trim());
 			}
-
 			else if (line.length === 0 && self.command !== null) {
 				var cmd = self.command.trim().split(/:/)[0];
 
@@ -261,13 +261,10 @@ instance.prototype.init_tcp = function() {
 				self.stash = [];
 				self.command = null;
 			}
-
 			else {
 				debug("weird response from teranex", line, line.length);
 			}
-
 		});
-
 	}
 };
 
@@ -547,7 +544,6 @@ instance.prototype.actions = function() {
 				}
 			]
 		},
-
 		'set_audio': {
 			label: 'Set audio input',
 			options: [
@@ -560,7 +556,6 @@ instance.prototype.actions = function() {
 				}
 			]
 		},
-		
 		'recall_preset': {
 			label: 'Recall preset',
 			options: [
@@ -573,7 +568,6 @@ instance.prototype.actions = function() {
 				}
 			]
 		},
-		
 		'test_pattern': {
 			label: 'Test Pattern',
 			options: [
@@ -586,7 +580,6 @@ instance.prototype.actions = function() {
 				}
 			]
 		},
-		
 		'output_display': {
 			label: 'Output display',
 			options: [
@@ -615,13 +608,13 @@ instance.prototype.action = function(action) {
 	}
 	else if (action.action === 'recall_preset') {
 		cmd = "PRESET:\nRecall:" + action.options.source + "\n\n";
-		}
+	}
 	else if (action.action === 'test_pattern') {
 		cmd = "TEST PATTERN:\nOutput:" + action.options.testPattern + "\n\n";
-		}
+	}
 	else if (action.action === 'output_display') {
 		cmd = "VIDEO OUTPUT:\nOutput option:" + action.options.outputDisplay + "\n\n";
-		}	
+	}	
 
 	if (cmd !== undefined) {
 		if (self.socket !== undefined && self.socket.connected) {
@@ -630,7 +623,6 @@ instance.prototype.action = function(action) {
 			debug('Socket not connected :(');
 		}
 	}
-	
 };
 
 instance_skel.extendedBy(instance);
