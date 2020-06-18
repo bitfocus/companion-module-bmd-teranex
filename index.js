@@ -12,9 +12,11 @@ function instance(system, id, config) {
 	self.request_id = 0;
 	self.stash = [];
 	self.command = null;
-
+	
 	self.video_sources = [
 		{ id: 'SDI', label: 'SDI' },
+		{ id: 'SDI1', label: 'SDI 1 (AV model)' },
+		{ id: 'SDI2', label: 'SDI 2 (AV model)' },
 		{ id: 'HDMI', label: 'HDMI' },
 		{ id: 'Composite', label: 'Composite' },
 		{ id: 'Component', label: 'Component' },
