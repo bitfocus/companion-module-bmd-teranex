@@ -14,9 +14,9 @@ function instance(system, id, config) {
 	self.command = null;
 	
 	self.video_sources = [
-		{ id: 'SDI', label: 'SDI (Express)' },
-		{ id: 'SDI1', label: 'SDI1 (AV)' },
-		{ id: 'SDI2', label: 'SDI2 (AV)' },
+		{ id: 'SDI', label: 'SDI' },
+		{ id: 'SDI1', label: 'SDI 1 (AV model)' },
+		{ id: 'SDI2', label: 'SDI 2 (AV model)' },
 		{ id: 'HDMI', label: 'HDMI' },
 		{ id: 'Composite', label: 'Composite' },
 		{ id: 'Component', label: 'Component' },
