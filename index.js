@@ -12,28 +12,29 @@ function instance(system, id, config) {
 	self.request_id = 0;
 	self.stash = [];
 	self.command = null;
-	
+
 	self.video_sources = [
-		{ id: 'SDI', label: 'SDI' },
-		{ id: 'SDI1', label: 'SDI 1 (AV model)' },
-		{ id: 'SDI2', label: 'SDI 2 (AV model)' },
-		{ id: 'HDMI', label: 'HDMI' },
-		{ id: 'Composite', label: 'Composite' },
-		{ id: 'Component', label: 'Component' },
-		{ id: 'Optical', label: 'Optical' }
+		{ id: 'SDI', label: 'SDI (2D, 3D, Express)' },
+		{ id: 'SDI1', label: 'SDI 1 (AV)' },
+		{ id: 'SDI2', label: 'SDI 2 (AV)' },
+		{ id: 'HDMI', label: 'HDMI (2D, 3D, AV)' },
+		{ id: 'Composite', label: 'Composite (2D, 3D)' },
+		{ id: 'Component', label: 'Component (2D, 3D)' },
+		{ id: 'Optical', label: 'Optical (Express, AV)' }
 	];
 
 	self.audio_sources = [
-		{ id: 'Embedded', label: 'Embedded' },
-		{ id: 'AES', label: 'AES' },
-		{ id: 'RCA', label: 'RCA' },
-		{ id: 'DB25', label: 'DB25 (Analog)' }
+		{ id: 'Embedded', label: 'Embedded (2D, 3D, Express, AV)' },
+		{ id: 'AES', label: 'AES (2D, 3D, AV)' },
+		{ id: 'RCA', label: 'RCA (2D, 3D, AV)' },
+		{ id: 'DB25', label: 'DB25 (2D, 3D, AV))' }
 	];
 
 	// Teranex AV and Teranex Express
-	self.avex_output_formats = [
-		{ id: '525i59.94', label: '525i 59.94hz NTSC' },
-		{ id: '625i50', label: '625i 50hz PAL' },
+	// 	self.avex_output_formats = [
+		self.output_format = [
+		{ id: '525i59.94 NTSC', label: '525i 59.94hz NTSC' },
+		{ id: '625i50 PAL', label: '625i 50hz PAL' },
 		{ id: '720p50', label: '720p 50hz' },
 		{ id: '720p59.94', label: '720p 59.94hz' },
 		{ id: '720p60', label: '720p 60hz' },
@@ -58,43 +59,14 @@ function instance(system, id, config) {
 		{ id: '2K DCI 23.98PsF', label: '2K DCI PsF 23.98hz' },
 		{ id: '2K DCI 24p', label: '2K DCI 24hz' },
 		{ id: '2K DCI 24PsF', label: '2K DCI PsF 24hz' },
-		{ id: '2160p23.98', label: '2160p 23.98hz' },
-		{ id: '2160p24', label: '2160p 24hz' },
-		{ id: '2160p25', label: '2160p 25hz' },
-		{ id: '2160p29.97', label: '2160p 29.97hz' },
-		{ id: '2160p30', label: '2160p 30hz' },
-		{ id: '2160p50', label: '2160p 50hz' },
-		{ id: '2160p59.94', label: '2160p 59.94hz' },
-		{ id: '2160p60', label: '2160p 60hz' }
-	];
-
-	self.t2d3d_output_formats = [
-		{ id: '525i59.94', label: '525i 59.94hz NTSC' },
-		{ id: '625i50', label: '625i 50hz PAL' },
-		{ id: '720p50', label: '720p 50hz' },
-		{ id: '720p59.94', label: '720p 59.94hz' },
-		{ id: '720p60', label: '720p 60hz' },
-		{ id: '1080p23.98', label: '1080p 23.98hz' },
-		{ id: '1080PsF23.98', label: '1080PsF 23.98hz' },
-		{ id: '1080p24', label: '1080p 24hz' },
-		{ id: '1080PsF24', label: '1080PsF 24hz' },
-		{ id: '1080p25', label: '1080p 25hz' },
-		{ id: '1080PsF25', label: '1080PsF 25hz' },
-		{ id: '1080p29.97', label: '1080p 29.97hz' },
-		{ id: '1080PsF29.97', label: '1080PsF 29.97hz' },
-		{ id: '1080p30', label: '1080p 30hz' },
-		{ id: '1080PsF30', label: '1080PsF 30hz' },
-		{ id: '1080i50', label: '1080i 50hz' },
-		{ id: '1080p50', label: '1080p 50hz' },
-		{ id: '1080i59.94', label: '1080i 59.94hz' },
-		{ id: '1080p59.94', label: '1080p 59.94hz' },
-		{ id: '1080i60', label: '1080i 50hz' },
-		{ id: '1080p60', label: '1080p 50hz' },
-		{ id: '1080p59.94', label: '1080p 59.94hz' },
-		{ id: '2K DCI 23.98p', label: '2K DCI 23.98hz' },
-		{ id: '2K DCI 23.98PsF', label: '2K DCI PsF 23.98hz' },
-		{ id: '2K DCI 24p', label: '2K DCI 24hz' },
-		{ id: '2K DCI 24PsF', label: '2K DCI PsF 24hz' }
+		{ id: '2160p23.98', label: '2160p 23.98hz (AV/Express)' },
+		{ id: '2160p24', label: '2160p 24hz (AV/Express)' },
+		{ id: '2160p25', label: '2160p 25hz (AV/Express)' },
+		{ id: '2160p29.97', label: '2160p 29.97hz (AV/Express)' },
+		{ id: '2160p30', label: '2160p 30hz (AV/Express)' },
+		{ id: '2160p50', label: '2160p 50hz (AV/Express)' },
+		{ id: '2160p59.94', label: '2160p 59.94hz (AV/Express)' },
+		{ id: '2160p60', label: '2160p 60hz (AV/Express)' }
 	];
 		
 	// Select Terenex preset
@@ -117,13 +89,54 @@ function instance(system, id, config) {
 		{ id: 'Multiburst', label: 'Res Chart' }
 	];
 	
+	// Select option for when there is no signal
+	self.noSignal = [
+		{id: 'Black', label: 'Black' },
+		{id: 'Bars', label: 'Colorbars' }
+	];
+	
+	// Select test tone for test pattern
+	self.testTone = [
+		{ id: 'None', label: 'None' },
+		{ id: 'Tone750Hz', label: 'Tone .75KHz' },
+		{ id: 'Tone1500Hz', label: 'Tone 1.5KHz' },
+		{ id: 'Tone3KHz', label: 'Tone 3KHz' },
+		{ id: 'Tone6KHz', label: 'Tone 6KHz' }
+	];
+	
+	
+	// Motion ON or OFF for Test Pattern
+	self.testPatternMotion = [
+		{ id: 'true', label: 'On' },
+		{ id: 'false', label: 'Off' }
+	];
+	
+	//Horizontal rate for test pattern
+	self.horizontalRate = [
+		{ id: '-3', label: '-3'},
+		{ id: '-2', label: '-2'},
+		{ id: '-1', label: '-1'},
+		{ id: '0', label: '0'},
+		{ id: '1', label: '1'},
+		{ id: '2', label: '2'},
+		{ id: '3', label: '3'}
+	];
+	
 	// Select Output Display
 	self.outputDisplay = [
 		{ id: 'Input', label: 'Input' },
-		{ id: 'Freeze', label: 'Freeze'},
 		{ id: 'Black', label: 'Black' },
-		{ id: 'Still', label: 'Still' }
+		{ id: 'Still', label: 'Still' },
+		{ id: 'Freeze', label: 'Freeze'}
 	];
+	
+	// Zoom Crop option
+	self.zoomCrop = [
+		{ id: 'true', label: 'On' },
+		{ id: 'false', label: 'Off' }
+	];
+	
+	
 
 	// super-constructor
 	instance_skel.apply(this, arguments);
@@ -164,6 +177,16 @@ instance.prototype.teranexInformation = function(key,data) {
 			self.signal_present = data['Signal present'];
 			self.checkFeedbacks('signal_present');
 			self.has_data = true;
+		}
+		
+	}
+	
+	if (key == 'VIDEO OUTPUT') {
+		debug("VIDEO OUTPUT DATA: ", data);
+		
+		if (data['Video mode'] !== undefined) {
+			self.output_format = data['Video mode'];
+			self.setVariable('output_format', self.output_format);
 		}
 	}
 
@@ -320,9 +343,14 @@ instance.prototype.update_variables = function (system) {
 		label: 'Selected audio input',
 		name: 'audio_input'
 	});
+	variables.push({
+		label: 'Selected video output',
+		name: 'output_format'
+	});
 	self.setVariable('input_format', self.input_format);
 	self.setVariable('video_input', self.video_source);
 	self.setVariable('audio_input', self.audio_source);
+	self.setVariable('output_formats', self.output_formats);
 
 	self.setVariableDefinitions(variables);
 
@@ -349,10 +377,10 @@ instance.prototype.update_variables = function (system) {
 				type: 'dropdown',
 				label: 'Input',
 				id: 'input',
-				default: 'SDI',
+				default: 'SDI1',
 				choices: self.video_sources
 			}
-		]
+			]
 	};
 
 	feedbacks['audio_bg'] = {
@@ -541,7 +569,7 @@ instance.prototype.actions = function() {
 					type: 'dropdown',
 					label: 'Source',
 					id: 'source',
-					default: 'SDI',
+					default: 'SDI1',
 					choices: self.video_sources
 				}
 			]
@@ -571,7 +599,7 @@ instance.prototype.actions = function() {
 			]
 		},
 		'test_pattern': {
-			label: 'Test Pattern',
+			label: 'Test pattern',
 			options: [
 				{
 					type: 'dropdown',
@@ -579,6 +607,34 @@ instance.prototype.actions = function() {
 					id: 'testPattern',
 					default: 'None',
 					choices: self.testPattern
+				},
+				{
+					type: 'dropdown',
+					label: 'No Signal',
+					id: 'noSignal',
+					default: 'Black',
+					choices: self.noSignal
+				},
+				{
+					type: 'dropdown',
+					label: 'Test Tone',
+					id: 'testTone',
+					default: 'None',
+					choices: self.testTone
+				},
+				{
+					type: 'dropdown',
+					label: 'Motion',
+					id: 'testPatternMotion',
+					default: 'false',
+					choices: self.testPatternMotion
+				},
+				{
+					type: 'dropdown',
+					label: 'Horizontal rate',
+					id: 'horizontalRate',
+					default: '0',
+					choices: self.horizontalRate
 				}
 			]
 		},
@@ -591,6 +647,102 @@ instance.prototype.actions = function() {
 					id: 'outputDisplay',
 					default: 'Input',
 					choices: self.outputDisplay
+				},
+				{
+					type: 'number',
+					label: 'Transition Settings',
+					id: 'transitionSetting',
+					default: 0,
+					min: 0,
+					max: 50,
+					required: false,
+					tooltip: 'Enter 0 to 50. Example: 1.5 seconds, enter 15. Example: 5 seconds, enter 50. No decimals.'
+				}
+			]
+		},
+		'output_format': {
+			label: 'Output format',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Output Format',
+					id: 'outputFormats',
+					default: '1080i5994',
+					choices: self.output_format
+				}
+			]
+		},
+		
+		'variable_aspect_ratio': {
+			label: 'Variable aspect ratio',
+			options: [
+				{
+					type: 'number',
+					label: 'Horizontal Size',
+					id: 'horizontalSize',
+					default: 0,
+					min: -9999,
+					max: 9999,
+					required: false,
+					tooltip: 'Maximum/Minimum range is half minus one of the horizontal size.',
+				},
+				{
+					type: 'number',
+					label: 'Vertical Size',
+					id: 'verticalSize',
+					default: 0,
+					min: -9999,
+					max: 9999,
+					required: false,
+					tooltip: 'Maximum/Minimum range is half minus one of the vertical size.',
+				},
+				{
+					type: 'number',
+					label: 'Horizontal Position',
+					id: 'horizontalPosition',
+					default: 0,
+					min: -9999,
+					max: 9999,
+					required: false,
+					tooltip: ' Maximum/Minimum range is half minus one of the horizontal size.',
+				},
+				{
+					type: 'number',
+					label: 'Vertical Position',
+					id: 'verticalPosition',
+					default: 0,
+					min: -9999,
+					max: 9999,
+					required: false,
+					tooltip: ' Maximum/Minimum range is half minus one of the vertical size.',
+				},
+				
+				{
+					type: 'number',
+					label: 'Horizontal Trim',
+					id: 'horizontalTrim',
+					default: 0,
+					min: 0,
+					max: 9999,
+					required: false,
+					tooltip: ' Maximum range is half minus one of the horizontal size.',
+				},
+				{
+					type: 'number',
+					label: 'Vertical Trim',
+					id: 'verticalTrim',
+					default: 0,
+					min: 0,
+					max: 9999,
+					required: false,
+					tooltip: ' Maximum range is half minus one of the vertical size.',
+				},
+				{
+					type: 'dropdown',
+					label: 'Zoom/Crop',
+					id: 'zoomCrop',
+					default: 'false',
+					choices: self.zoomCrop
 				}
 			]
 		}
@@ -612,11 +764,24 @@ instance.prototype.action = function(action) {
 		cmd = "PRESET:\nRecall:" + action.options.source + "\n\n";
 	}
 	else if (action.action === 'test_pattern') {
-		cmd = "TEST PATTERN:\nOutput:" + action.options.testPattern + "\n\n";
+		cmd = "TEST PATTERN:\nOutput:" + action.options.testPattern + "\nNo Signal:" + action.options.noSignal + "\nTest Tone:" + action.options.testTone + "\nMotion:" + action.options.testPatternMotion + "\nHorizontal rate:" + action.options.horizontalRate + "\n\n";
 	}
 	else if (action.action === 'output_display') {
-		cmd = "VIDEO OUTPUT:\nOutput option:" + action.options.outputDisplay + "\n\n";
+		cmd = "VIDEO OUTPUT:\nOutput option:" + action.options.outputDisplay + "\n" + "Transition setting:" + action.options.transitionSetting + "\n\n";
 	}	
+	else if (action.action === 'output_format') {
+		cmd = "VIDEO OUTPUT:\nVideo mode:" + action.options.outputFormats + "\n\n";
+	}
+ 	else if (action.action === 'variable_aspect_ratio') {
+	 	cmd = "VARIABLE ASPECT RATIO:" + "\n" +
+	 	"Variable Aspect Ratio size X left:" + action.options.horizontalSize + "\n" +
+ 	 	"Variable Aspect Ratio size Y left:" + action.options.verticalSize + "\n" +
+ 	 	"Variable Aspect Ratio pos X left:" + action.options.horizontalPosition + "\n" +
+ 	 	"Variable Aspect Ratio pos Y left:" + action.options.verticalPosition + "\n" +
+ 	 	"Variable Aspect Ratio trim X left:" + action.options.horizontalTrim + "\n" +
+ 	 	"Variable Aspect Ratio trim Y left:" + action.options.verticalTrim + "\n" +
+ 	 	"Variable Aspect Ratio zoom/crop:" + action.options.zoomCrop + "\n\n";
+ 	}
 
 	if (cmd !== undefined) {
 		if (self.socket !== undefined && self.socket.connected) {
