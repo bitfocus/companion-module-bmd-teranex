@@ -560,7 +560,7 @@ instance.prototype.init_presets = function () {
 instance.prototype.actions = function() {
 	var self = this;
 
-	self.system.emit('instance_actions', self.id, {
+	self.setActions({
 
 		'set_input': {
 			label: 'Set video input',
