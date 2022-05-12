@@ -335,6 +335,7 @@ instance.prototype.init_tcp = function() {
 	let receivebuffer = '';
 
 	if (self.socket !== undefined) {
+		self.setVariable('connect_status', 'Disconnected');
 		self.socket.destroy();
 		delete self.socket;
 	}
@@ -356,10 +357,15 @@ instance.prototype.init_tcp = function() {
 			debug("Network error", err);
 			self.log('error',"Network error: " + err.message);
 			self.socket.destroy();
+			delete self.socket;
+			self.setVariable('connect_status', 'Disconnected');
+			self.log('info', 'Retrying connection in 10 seconds...');
+			setTimeout(self.init_tcp.bind(self), 10000); //retry after 10 seconds
 		});
 
 		self.socket.on('connect', function () {
 			debug("Connected");
+			self.setVariable('connect_status', 'Connected');
 		});
 
 		// separate buffered stream into lines with responses
@@ -444,6 +450,11 @@ instance.prototype.destroy = function() {
 instance.prototype.update_variables = function (system) {
 	let self = this;
 	let variables = [];
+
+	variables.push({
+		label: 'Connection Status',
+		name: 'connect_status'
+	});
 
 	variables.push({
 		label: 'Input video format',
@@ -546,6 +557,8 @@ instance.prototype.update_variables = function (system) {
 		label: 'Video Proc Amp Sharp',
 		name: 'video_procamp_sharp'
 	});
+
+	self.setVariable('connect_status', 'Disconnected');
 
 	self.setVariable('input_format', self.input_format);
 	self.setVariable('video_input', self.video_source);
