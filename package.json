@@ -1,14 +1,6 @@
 {
 	"name": "bmd-teranex",
-	"version": "1.0.9",
-	"api_version": "1.0.0",
-	"keywords": [
-		"Image Processing"
-	],
-	"manufacturer": "Blackmagic Design",
-	"product": "Teranex",
-	"shortname": "teranex",
-	"description": "",
+	"version": "2.0.0",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
@@ -17,13 +9,11 @@
 		"type": "git",
 		"url": "git+https://github.com/bitfocus/companion-module-bmd-teranex.git"
 	},
-	"author": "Håkon Nessjøen <haakon@bitfocus.io>",
-	"contributors": [
-		"Joseph Adams <josephdadams@gmail.com>"
-	],
 	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/bitfocus/companion-module-bmd-teranex/issues"
+	"dependencies": {
+		"@companion-module/base": "~1.4.3"
 	},
-	"homepage": "https://github.com/bitfocus/companion-module-bmd-teranex#readme"
+	"devDependencies": {
+		"@companion-module/tools": "^1.4.0"
+	}
 }

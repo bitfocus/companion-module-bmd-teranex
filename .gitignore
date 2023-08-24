@@ -1,1 +1,6 @@
 **/*.swp
+.DS_Store
+node_modules/
+package-lock.json
+/pkg
+/pkg.tgz
