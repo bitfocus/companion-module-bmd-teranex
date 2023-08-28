@@ -87,6 +87,9 @@ module.exports = {
 		let self = this;
 	
 		if (self.socket !== undefined && self.socket.isConnected) {
+			if (self.config.debug) {
+				self.log('debug', 'SENDING COMMAND: ' + cmd);
+			}
 			self.socket.send(cmd);
 		}
 		else {
