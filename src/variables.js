@@ -44,12 +44,10 @@ module.exports = {
 		try {
 			let variableObj = {};
 
-			variableObj.connect_status = 'Disconnected';
-
 			variableObj.input_format = self.input_format;
 			variableObj.video_input = self.video_source;
 			variableObj.audio_input = self.audio_source;
-			variableObj.output_formats = self.output_formats;
+			variableObj.output_format = self.output_format;
 
 			variableObj.video_adjust_red = self.data.video_adjust.red;
 			variableObj.video_adjust_green = self.data.video_adjust.green;

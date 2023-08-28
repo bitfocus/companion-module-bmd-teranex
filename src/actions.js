@@ -1315,7 +1315,7 @@ module.exports = {
 			callback: function(action, bank) {
 				let value = self.data.genlock.reference;
 
-				let cmd = "GENLOCK:\nGen reference:" + value + "\n\n";
+				let cmd = "GENLOCK:\nGen reference: " + value + "\n\n";
 				self.sendCommand(cmd);
 			}
 		};
@@ -1347,14 +1347,14 @@ module.exports = {
 				value = value + intSteps;
 				
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.pixel_offset_max !== undefined) {
 					if (value > outputFormatObj.pixel_offset_max) {
 						value = outputFormatObj.pixel_offset_max;
 					}
 
-					let cmd = "GENLOCK:\nPixel offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nPixel offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1391,14 +1391,14 @@ module.exports = {
 				value = value - intSteps;
 				
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.pixel_offset_min !== undefined) {
 					if (value < outputFormatObj.pixel_offset_min) {
 						value = outputFormatObj.pixel_offset_min;
 					}
 
-					let cmd = "GENLOCK:\nPixel offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nPixel offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1413,11 +1413,11 @@ module.exports = {
 			options: [],
 			callback: async function(action, bank) {				
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.pixel_offset_max !== undefined) {
 					let value = outputFormatObj.pixel_offset_max;
-					let cmd = "GENLOCK:\nPixel offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nPixel offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1432,11 +1432,11 @@ module.exports = {
 			options: [],
 			callback: async function(action, bank) {				
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.pixel_offset_min !== undefined) {
 					let value = outputFormatObj.pixel_offset_min;
-					let cmd = "GENLOCK:\nPixel offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nPixel offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1473,14 +1473,14 @@ module.exports = {
 				value = value + intSteps;
 
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.line_offset_max !== undefined) {
 					if (value > outputFormatObj.line_offset_max) {
 						value = outputFormatObj.line_offset_max;
 					}
 
-					let cmd = "GENLOCK:\nLine offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nLine offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1517,14 +1517,14 @@ module.exports = {
 				value = value - intSteps;
 				
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.line_offset_min !== undefined) {
 					if (value < outputFormatObj.line_offset_min) {
 						value = outputFormatObj.line_offset_min;
 					}
 
-					let cmd = "GENLOCK:\nLine offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nLine offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1539,11 +1539,11 @@ module.exports = {
 			options: [],
 			callback: async function(action, bank) {				
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.line_offset_max !== undefined) {
 					let value = outputFormatObj.line_offset_max;
-					let cmd = "GENLOCK:\nLine offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nLine offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1558,11 +1558,11 @@ module.exports = {
 			options: [],
 			callback: async function(action, bank) {				
 				//find the min/max range out of the output_formats object
-				let outputFormatObj = self.output_formats.find( ({ OUTPUT }) => OUTPUT.id === self.output_format );
+				let outputFormatObj = self.output_formats.find( OUTPUT => OUTPUT.id === self.output_format );
 
 				if (outputFormatObj !== undefined && outputFormatObj.line_offset_min !== undefined) {
 					let value = outputFormatObj.line_offset_min;
-					let cmd = "GENLOCK:\nLine offset:" + value + "\n\n";
+					let cmd = "GENLOCK:\nLine offset: " + value + "\n\n";
 					self.sendCommand(cmd);
 				}
 				else {
@@ -1589,7 +1589,7 @@ module.exports = {
 			callback: function(action, bank) {
 				let value = self.data.genlock.source;
 
-				let cmd = "GENLOCK:\nType:" + value + "\n\n";
+				let cmd = "GENLOCK:\nType: " + value + "\n\n";
 				self.sendCommand(cmd);
 			}
 		};
