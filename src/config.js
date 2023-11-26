@@ -8,14 +8,14 @@ module.exports = {
 				id: 'info',
 				width: 12,
 				label: 'Information',
-				value: 'This module will connect to a Blackmagic Design Teranex Device.'
+				value: 'This module will connect to a Blackmagic Design Teranex Device.',
 			},
 			{
 				type: 'textinput',
 				id: 'host',
 				label: 'IP',
 				width: 4,
-				regex: Regex.IP
+				regex: Regex.IP,
 			},
 			{
 				type: 'checkbox',
@@ -29,7 +29,8 @@ module.exports = {
 				id: 'debugInfo',
 				width: 11,
 				label: 'Enable Debug To Log Window',
-				value: 'This will allow you the see what is being sent from the module and what is being received from the device.',
+				value:
+					'This will allow you the see what is being sent from the module and what is being received from the device.',
 			},
 		]
 	},

@@ -2,7 +2,7 @@ const { combineRgb } = require('@companion-module/base')
 
 module.exports = {
 	initPresets: function () {
-		let self = this;
+		let self = this
 		let presets = []
 
 		const foregroundColor = combineRgb(255, 255, 255) // White
@@ -13,7 +13,7 @@ module.exports = {
 
 		// Video
 		for (let i = 0; i < self.video_sources.length; ++i) {
-			let input = self.video_sources[i].id;
+			let input = self.video_sources[i].id
 			presets.push({
 				type: 'button',
 				category: 'Video',
@@ -22,7 +22,7 @@ module.exports = {
 					text: input,
 					size: 'auto',
 					color: '16777215',
-					bgcolor: 0
+					bgcolor: 0,
 				},
 				steps: [
 					{
@@ -30,27 +30,27 @@ module.exports = {
 							{
 								actionId: 'set_input',
 								options: {
-									source: input
-								}
-							}
+									source: input,
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'input_bg',
 						options: {
-							input: input
-						}
-					}
-				]
-			});
+							input: input,
+						},
+					},
+				],
+			})
 		}
 
 		// Audio
 		for (let i = 0; i < self.audio_sources.length; ++i) {
-			let input = self.audio_sources[i].id;
+			let input = self.audio_sources[i].id
 			presets.push({
 				type: 'button',
 				category: 'Audio',
@@ -59,7 +59,7 @@ module.exports = {
 					text: input,
 					size: 'auto',
 					color: '16777215',
-					bgcolor: 0
+					bgcolor: 0,
 				},
 				steps: [
 					{
@@ -67,22 +67,22 @@ module.exports = {
 							{
 								actionId: 'set_audio',
 								options: {
-									source: input
-								}
-							}
+									source: input,
+								},
+							},
 						],
-						up: []
-					}
+						up: [],
+					},
 				],
 				feedbacks: [
 					{
 						feedbackId: 'audio_bg',
 						options: {
-							input: input
-						}
-					}
-				]
-			});
+							input: input,
+						},
+					},
+				],
+			})
 		}
 
 		// Signal present
@@ -94,17 +94,17 @@ module.exports = {
 				text: '$(teranex:input_format)',
 				size: 'auto',
 				color: '16777215',
-				bgcolor: combineRgb(255, 0, 0)
+				bgcolor: combineRgb(255, 0, 0),
 			},
 			steps: [],
 			feedbacks: [
 				{
 					feedbackId: 'signal_present',
-					options: {}
-				}
-			]
-		});
+					options: {},
+				},
+			],
+		})
 
-		self.setPresetDefinitions(presets);
-	}
+		self.setPresetDefinitions(presets)
+	},
 }
