@@ -24,7 +24,7 @@ class teranexInstance extends InstanceBase {
 			...variables,
 			...presets,
 			...utils,
-			...choices
+			...choices,
 		})
 
 		this.data = {
@@ -38,7 +38,7 @@ class teranexInstance extends InstanceBase {
 				chroma_high: 1019,
 				aspect_fill_luma: 64,
 				aspect_fill_cb: 512,
-				aspect_fill_cr: 512
+				aspect_fill_cr: 512,
 			},
 			video_procamp: {
 				gain: 0,
@@ -47,24 +47,24 @@ class teranexInstance extends InstanceBase {
 				hue: 0,
 				ry: 0,
 				by: 0,
-				sharp: 0
+				sharp: 0,
 			},
 			genlock: {
 				type: '',
 				reference: '',
 				lineoffset: 1,
 				pixeloffset: 0,
-				signallocked: ''
-			}
-		};
+				signallocked: '',
+			},
+		}
 
-		this.stash = [];
-		this.command = null;
+		this.stash = []
+		this.command = null
 	}
 
 	async destroy() {
 		if (this.socket !== undefined) {
-			this.socket.destroy();
+			this.socket.destroy()
 		}
 	}
 
@@ -75,14 +75,14 @@ class teranexInstance extends InstanceBase {
 	async configUpdated(config) {
 		this.config = config
 
-		this.updateStatus(InstanceStatus.Connecting);
-		
+		this.updateStatus(InstanceStatus.Connecting)
+
 		this.initActions()
 		this.initFeedbacks()
 		this.initVariables()
 		this.initPresets()
 
-		this.initTCP();
+		this.initTCP()
 	}
 }
 

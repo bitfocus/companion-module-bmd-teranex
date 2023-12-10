@@ -14,7 +14,7 @@ module.exports = {
 			description: 'If the input specified is the active video input, change colors of the bank',
 			defaultStyle: {
 				color: foregroundColor,
-				bgcolor: backgroundColorRed
+				bgcolor: backgroundColorRed,
 			},
 			options: [
 				{
@@ -22,25 +22,25 @@ module.exports = {
 					label: 'Input',
 					id: 'input',
 					default: 'SDI1',
-					choices: self.video_sources
-				}
+					choices: self.video_sources,
+				},
 			],
 			callback: async function (feedback, bank) {
 				if (self.video_source === feedback.options.input) {
-					return true;
+					return true
 				}
 
-				return false;
-			}
-		};
-		
+				return false
+			},
+		}
+
 		feedbacks.audio_bg = {
 			type: 'boolean',
 			name: 'Audio input: Change background color',
 			description: 'If the input specified is the active audio input, change colors of the bank',
 			defaultStyle: {
 				color: foregroundColor,
-				bgcolor: backgroundColorRed
+				bgcolor: backgroundColorRed,
 			},
 			options: [
 				{
@@ -48,36 +48,36 @@ module.exports = {
 					label: 'Input',
 					id: 'input',
 					default: 'Embedded',
-					choices: self.audio_sources
-				}
+					choices: self.audio_sources,
+				},
 			],
 			callback: async function (feedback, bank) {
 				if (self.audio_source === feedback.options.input) {
-					return true;
+					return true
 				}
 
-				return false;
-			}
-		};
-		
+				return false
+			},
+		}
+
 		feedbacks.signal_present = {
 			type: 'boolean',
 			name: 'Signal is present',
 			description: 'Change colors of bank if the signal is present',
 			defaultStyle: {
 				color: foregroundColor,
-				bgcolor: backgroundColorRed
+				bgcolor: backgroundColorRed,
 			},
 			options: [],
 			callback: async function (feedback, bank) {
 				if (self.signal_present === 'true') {
-					return true;
+					return true
 				}
 
-				return false;
-			}
-		};
+				return false
+			},
+		}
 
-		self.setFeedbackDefinitions(feedbacks);
-	}
+		self.setFeedbackDefinitions(feedbacks)
+	},
 }
