@@ -1,9 +1,35 @@
 const { TCPHelper, InstanceStatus } = require('@companion-module/base')
 
 module.exports = {
+	parseIpAndPort: function() {
+		let self = this
+		// TODO: Switch to Regex.IP when we can convert that into a RegExp object... (it will need some processing)
+		const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
+
+		if (this.config.bonjourHost) {
+			const [ip, rawPort] = this.config.bonjourHost.split(':')
+			const port = Number(rawPort)
+			if (ip.match(ipRegex) && !isNaN(port)) {
+				return {
+					ip,
+					port,
+				}
+			}
+		} else if (this.config.host) {
+			if (this.config.host.match(ipRegex)) {
+				return {
+					ip: this.config.host,
+					port: undefined,
+				}
+			}
+		}
+		return null
+	},
+
 	initTCP: function () {
 		let self = this
 		let receivebuffer = ''
+		let target = self.parseIpAndPort()
 
 		if (self.socket !== undefined) {
 			self.setVariableValues({ connect_status: 'Disconnected' })
@@ -11,14 +37,15 @@ module.exports = {
 			delete self.socket
 		}
 
-		if (self.config.port === undefined) {
-			self.config.port = 9800
+		if (target && target.port === undefined) {
+			self.log('info', 'Setting port to default')
+			target.port = 9800
 		}
 
 		self.has_data = false
 
-		if (self.config.host) {
-			self.socket = new TCPHelper(self.config.host, self.config.port)
+		if (target && target.ip) {
+			self.socket = new TCPHelper(target.ip, target.port)
 
 			self.socket.on('error', function (err) {
 				self.log('error', 'Network error: ' + err.message)
@@ -78,6 +105,9 @@ module.exports = {
 					}
 				}
 			})
+		} else {
+			self.log('error', 'Didn\'t get a target to connect to')
+			self.updateStatus(InstanceStatus.Disconnected)
 		}
 	},
 

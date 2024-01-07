@@ -11,11 +11,27 @@ module.exports = {
 				value: 'This module will connect to a Blackmagic Design Teranex Device.',
 			},
 			{
+				type: 'bonjour-device',
+				id: 'bonjourHost',
+				label: 'Device',
+				width: 12,
+			},
+			{
 				type: 'textinput',
 				id: 'host',
 				label: 'IP',
-				width: 4,
+				width: 6,
+				isVisible: (options) => !options['bonjourHost'],
+				default: '',
 				regex: Regex.IP,
+			},
+			{
+				type: 'static-text',
+				id: 'host-filler',
+				width: 6,
+				label: '',
+				isVisible: (options) => !!options['bonjourHost'],
+				value: '',
 			},
 			{
 				type: 'checkbox',
