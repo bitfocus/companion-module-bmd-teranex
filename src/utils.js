@@ -1,4 +1,5 @@
 const { TCPHelper, InstanceStatus } = require('@companion-module/base')
+const keep_alive_value = 60000
 
 module.exports = {
 	initTCP: function () {
@@ -27,11 +28,13 @@ module.exports = {
 				self.setVariableValues({ connect_status: 'Disconnected' })
 				self.log('info', 'Retrying connection in 10 seconds...')
 				setTimeout(self.initTCP.bind(self), 10000) //retry after 10 seconds
+				self.killKeepAlive()
 			})
 
 			self.socket.on('connect', function () {
 				self.setVariableValues({ connect_status: 'Connected' })
 				self.updateStatus(InstanceStatus.Ok)
+				self.startKeepAlive()
 			})
 
 			// separate buffered stream into lines with responses
@@ -89,6 +92,7 @@ module.exports = {
 				self.log('debug', 'SENDING COMMAND: ' + cmd)
 			}
 			self.socket.send(cmd)
+			self.startKeepAlive()
 		} else {
 			self.log('error', 'Socket not connected :(')
 		}
@@ -238,4 +242,32 @@ module.exports = {
 		self.checkFeedbacks()
 		self.checkVariables()
 	},
+
+	keepAlive(){
+		let self = this
+
+		self.sendCommand('PING:')
+		self.keep_alive_timer = setTimeout(() => {
+			self.keepAlive()
+		}, keep_alive_value)
+	},
+
+	killKeepAlive(){
+		let self = this
+
+		if (self.keep_alive_timer) {
+			clearTimeout(self.keep_alive_timer)
+			delete self.keep_alive_timer
+		}
+	},
+	
+	startKeepAlive(){
+		let self = this
+
+		self.killKeepAlive()
+		self.keep_alive_timer = {}
+		self.keep_alive_timer = setTimeout(() => {
+			this.keepAlive()
+		}, keep_alive_value)
+	}
 }

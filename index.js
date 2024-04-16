@@ -66,6 +66,7 @@ class teranexInstance extends InstanceBase {
 		if (this.socket !== undefined) {
 			this.socket.destroy()
 		}
+		this.killKeepAlive()
 	}
 
 	async init(config) {
