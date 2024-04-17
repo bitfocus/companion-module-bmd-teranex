@@ -246,7 +246,7 @@ module.exports = {
 	keepAlive(){
 		let self = this
 
-		self.sendCommand('PING:')
+		self.sendCommand('PING\n\n')
 		self.keep_alive_timer = setTimeout(() => {
 			self.keepAlive()
 		}, keep_alive_value)
