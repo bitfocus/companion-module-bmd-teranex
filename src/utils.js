@@ -77,7 +77,13 @@ module.exports = {
 					self.command = null
 				} else {
 					if (self.config.debug) {
-						self.log('debug', 'Unexpected response from Teranex: ' + line)
+						if (line == 'ACK') {
+							self.log('debug', 'ACK recieved from Teranex')
+						} else if (line == '') {
+							self.log('debug', 'Empty line recieved from Teranex')
+						} else {
+							self.log('debug', 'Unexpected response from Teranex: ' + line)
+						}
 					}
 				}
 			})
