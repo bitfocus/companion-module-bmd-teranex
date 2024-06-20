@@ -286,15 +286,39 @@ module.exports = {
 					isVisible: (options) => options.sendZoomCrop,
 				},
 			],
-			callback: function (action, bank) {
+			callback: async function (action, bank) {
 				cmd = 'VARIABLE ASPECT RATIO:' + '\n';
 
-				if (action.options.sendHorizontalSize) cmd += 'Variable Aspect Ratio size X left:' + action.options.horizontalSize + '\n';
-				if (action.options.sendVerticalSize) cmd += 'Variable Aspect Ratio size Y left:' + action.options.verticalSize + '\n';
-				if (action.options.sendHorizontalPosition) cmd += 'Variable Aspect Ratio pos X left:' + action.options.horizontalPosition + '\n';
-				if (action.options.sendVerticalPosition) cmd += 'Variable Aspect Ratio pos Y left:' + action.options.verticalPosition + '\n';
-				if (action.options.sendHorizontalTrim) cmd += 'Variable Aspect Ratio trim X left:' + action.options.horizontalTrim + '\n';
-				if (action.options.sendVerticalTrim) cmd += 'Variable Aspect Ratio trim Y left:' + action.options.verticalTrim + '\n';
+				if (action.options.sendHorizontalSize) {
+					let horizontalSize = await self.parseVariablesInString(action.options.horizontalSize);
+					cmd += 'Variable Aspect Ratio size X left:' + horizontalSize + '\n';
+				}
+
+				if (action.options.sendVerticalSize) {
+					let verticalSize = await self.parseVariablesInString(action.options.verticalSize);
+					cmd += 'Variable Aspect Ratio size Y left:' + verticalSize + '\n';
+				}
+
+				if (action.options.sendHorizontalPosition) {
+					let horizontalPosition = await self.parseVariablesInString(action.options.horizontalPosition);
+					cmd += 'Variable Aspect Ratio pos X left:' + horizontalPosition + '\n';
+				}
+
+				if (action.options.sendVerticalPosition) {
+					let verticalPosition = await self.parseVariablesInString(action.options.verticalPosition);
+					cmd += 'Variable Aspect Ratio pos Y left:' + verticalPosition + '\n';
+				}
+
+				if (action.options.sendHorizontalTrim) {
+					let horizontalTrim = await self.parseVariablesInString(action.options.horizontalTrim);
+					cmd += 'Variable Aspect Ratio trim X left:' + horizontalTrim + '\n';
+				}
+
+				if (action.options.sendVerticalTrim) {
+					let verticalTrim = await self.parseVariablesInString(action.options.verticalTrim);
+					cmd += 'Variable Aspect Ratio trim Y left:' + verticalTrim + '\n';
+				}
+
 				if (action.options.sendZoomCrop) cmd += 'Variable Aspect Ratio zoom/crop:' + action.options.zoomCrop + '\n';
 
 				cmd += '\n';
