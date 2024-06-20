@@ -164,7 +164,13 @@ module.exports = {
 			name: 'Variable aspect ratio',
 			options: [
 				{
-					type: 'number',
+					type: 'checkbox',
+					label: 'Send Horizontal Size Property',
+					id: 'sendHorizontalSize',
+					default: true,
+				},
+				{
+					type: 'textinput',
 					label: 'Horizontal Size',
 					id: 'horizontalSize',
 					default: 0,
@@ -172,9 +178,17 @@ module.exports = {
 					max: 9999,
 					required: false,
 					tooltip: 'Maximum/Minimum range is half minus one of the horizontal size.',
+					useVariables: true,
+					isVisible: (options) => options.sendHorizontalSize,
 				},
 				{
-					type: 'number',
+					type: 'checkbox',
+					label: 'Send Vertical Size Property',
+					id: 'sendVerticalSize',
+					default: true,
+				},
+				{
+					type: 'textinput',
 					label: 'Vertical Size',
 					id: 'verticalSize',
 					default: 0,
@@ -182,9 +196,17 @@ module.exports = {
 					max: 9999,
 					required: false,
 					tooltip: 'Maximum/Minimum range is half minus one of the vertical size.',
+					useVariables: true,
+					isVisible: (options) => options.sendVerticalSize,
 				},
 				{
-					type: 'number',
+					type: 'checkbox',
+					label: 'Send Horizontal Position Property',
+					id: 'sendHorizontalPosition',
+					default: true,
+				},
+				{
+					type: 'textinput',
 					label: 'Horizontal Position',
 					id: 'horizontalPosition',
 					default: 0,
@@ -192,9 +214,17 @@ module.exports = {
 					max: 9999,
 					required: false,
 					tooltip: ' Maximum/Minimum range is half minus one of the horizontal size.',
+					useVariables: true,
+					isVisible: (options) => options.sendHorizontalPosition,
 				},
 				{
-					type: 'number',
+					type: 'checkbox',
+					label: 'Send Vertical Position Property',
+					id: 'sendVerticalPosition',
+					default: true,
+				},
+				{
+					type: 'textinput',
 					label: 'Vertical Position',
 					id: 'verticalPosition',
 					default: 0,
@@ -202,10 +232,17 @@ module.exports = {
 					max: 9999,
 					required: false,
 					tooltip: ' Maximum/Minimum range is half minus one of the vertical size.',
+					useVariables: true,
+					isVisible: (options) => options.sendVerticalPosition,
 				},
-
 				{
-					type: 'number',
+					type: 'checkbox',
+					label: 'Send Horizontal Trim Property',
+					id: 'sendHorizontalTrim',
+					default: true,
+				},
+				{
+					type: 'textinput',
 					label: 'Horizontal Trim',
 					id: 'horizontalTrim',
 					default: 0,
@@ -213,9 +250,17 @@ module.exports = {
 					max: 9999,
 					required: false,
 					tooltip: ' Maximum range is half minus one of the horizontal size.',
+					useVariables: true,
+					isVisible: (options) => options.sendHorizontalTrim,
 				},
 				{
-					type: 'number',
+					type: 'checkbox',
+					label: 'Send Vertical Trim Property',
+					id: 'sendVerticalTrim',
+					default: true,
+				},				
+				{
+					type: 'textinput',
 					label: 'Vertical Trim',
 					id: 'verticalTrim',
 					default: 0,
@@ -223,6 +268,14 @@ module.exports = {
 					max: 9999,
 					required: false,
 					tooltip: ' Maximum range is half minus one of the vertical size.',
+					useVariables: true,
+					isVisible: (options) => options.sendVerticalTrim,
+				},
+				{
+					type: 'checkbox',
+					label: 'Send Zoom/Crop Property',
+					id: 'sendZoomCrop',
+					default: true,
 				},
 				{
 					type: 'dropdown',
@@ -230,33 +283,22 @@ module.exports = {
 					id: 'zoomCrop',
 					default: 'false',
 					choices: self.zoomCrop,
+					isVisible: (options) => options.sendZoomCrop,
 				},
 			],
 			callback: function (action, bank) {
-				cmd =
-					'VARIABLE ASPECT RATIO:' +
-					'\n' +
-					'Variable Aspect Ratio size X left:' +
-					action.options.horizontalSize +
-					'\n' +
-					'Variable Aspect Ratio size Y left:' +
-					action.options.verticalSize +
-					'\n' +
-					'Variable Aspect Ratio pos X left:' +
-					action.options.horizontalPosition +
-					'\n' +
-					'Variable Aspect Ratio pos Y left:' +
-					action.options.verticalPosition +
-					'\n' +
-					'Variable Aspect Ratio trim X left:' +
-					action.options.horizontalTrim +
-					'\n' +
-					'Variable Aspect Ratio trim Y left:' +
-					action.options.verticalTrim +
-					'\n' +
-					'Variable Aspect Ratio zoom/crop:' +
-					action.options.zoomCrop +
-					'\n\n'
+				cmd = 'VARIABLE ASPECT RATIO:' + '\n';
+
+				if (action.options.sendHorizontalSize) cmd += 'Variable Aspect Ratio size X left:' + action.options.horizontalSize + '\n';
+				if (action.options.sendVerticalSize) cmd += 'Variable Aspect Ratio size Y left:' + action.options.verticalSize + '\n';
+				if (action.options.sendHorizontalPosition) cmd += 'Variable Aspect Ratio pos X left:' + action.options.horizontalPosition + '\n';
+				if (action.options.sendVerticalPosition) cmd += 'Variable Aspect Ratio pos Y left:' + action.options.verticalPosition + '\n';
+				if (action.options.sendHorizontalTrim) cmd += 'Variable Aspect Ratio trim X left:' + action.options.horizontalTrim + '\n';
+				if (action.options.sendVerticalTrim) cmd += 'Variable Aspect Ratio trim Y left:' + action.options.verticalTrim + '\n';
+				if (action.options.sendZoomCrop) cmd += 'Variable Aspect Ratio zoom/crop:' + action.options.zoomCrop + '\n';
+
+				cmd += '\n';
+
 				self.sendCommand(cmd)
 			},
 		}
