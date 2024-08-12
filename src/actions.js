@@ -331,15 +331,16 @@ module.exports = {
 			name: 'Set Video Adjust Red Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -200 to +200',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -200) {
 					value = -200
 				} else if (value > 200) {
@@ -393,15 +394,16 @@ module.exports = {
 			name: 'Set Video Adjust Green Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -200 to +200',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -200) {
 					value = -200
 				} else if (value > 200) {
@@ -455,15 +457,16 @@ module.exports = {
 			name: 'Set Video Adjust Blue Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -200 to +200',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -200) {
 					value = -200
 				} else if (value > 200) {
@@ -517,15 +520,16 @@ module.exports = {
 			name: 'Set Video Adjust Luma Low Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '4',
 					tooltip: 'Value between 4 - 1018',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < 4) {
 					value = 4
 				} else if (value > 1018) {
@@ -579,15 +583,16 @@ module.exports = {
 			name: 'Set Video Adjust Luma High Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '1019',
 					tooltip: 'Value between 5 - 1019',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < 4) {
 					value = 4
 				} else if (value > 1019) {
@@ -641,15 +646,16 @@ module.exports = {
 			name: 'Set Video Adjust Chroma Low Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '4',
 					tooltip: 'Value between 4 - 1018',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < 4) {
 					value = 4
 				} else if (value > 1018) {
@@ -703,15 +709,16 @@ module.exports = {
 			name: 'Set Video Adjust Chroma High Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '1019',
 					tooltip: 'Value between 5 - 1019',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < 4) {
 					value = 4
 				} else if (value > 1019) {
@@ -765,15 +772,16 @@ module.exports = {
 			name: 'Set Video Adjust Aspect Fill Luma Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '64',
 					tooltip: 'Value between 64 - 940',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < 64) {
 					value = 64
 				} else if (value > 940) {
@@ -827,15 +835,16 @@ module.exports = {
 			name: 'Set Video Adjust Aspect Fill Cb Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '512',
 					tooltip: 'Value between 64 - 960',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < 64) {
 					value = 64
 				} else if (value > 960) {
@@ -889,15 +898,16 @@ module.exports = {
 			name: 'Set Video Adjust Aspect Fill Cr Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '512',
 					tooltip: 'Value between 64 - 960',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < 64) {
 					value = 64
 				} else if (value > 960) {
@@ -951,15 +961,16 @@ module.exports = {
 			name: 'Set Video Proc Amp Gain Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -60 to +60',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -60) {
 					value = -60
 				} else if (value > 60) {
@@ -1013,15 +1024,16 @@ module.exports = {
 			name: 'Set Video Proc Amp Black Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -30 to +30',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -30) {
 					value = -30
 				} else if (value > 30) {
@@ -1075,15 +1087,16 @@ module.exports = {
 			name: 'Set Video Proc Saturation Gain Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -60 to +60',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -60) {
 					value = -60
 				} else if (value > 60) {
@@ -1137,15 +1150,16 @@ module.exports = {
 			name: 'Set Video Proc Amp Hue Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -179 to +180',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -179) {
 					value = -179
 				} else if (value > 180) {
@@ -1199,15 +1213,16 @@ module.exports = {
 			name: 'Set Video Proc Amp RY Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -200 to +200',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -200) {
 					value = -200
 				} else if (value > 200) {
@@ -1261,15 +1276,16 @@ module.exports = {
 			name: 'Set Video Proc Amp BY Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -200 to +200',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -200) {
 					value = -200
 				} else if (value > 200) {
@@ -1323,15 +1339,16 @@ module.exports = {
 			name: 'Set Video Proc Amp Sharp Value',
 			options: [
 				{
-					type: 'textwithvariables',
+					type: 'textinput',
 					label: 'Value',
 					id: 'value',
 					default: '0',
 					tooltip: 'Value between -50 to +50',
+					useVariables: true,
 				},
 			],
-			callback: function (action, bank) {
-				let value = parseInt(action.options.value)
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
 				if (value < -50) {
 					value = -50
 				} else if (value > 50) {
