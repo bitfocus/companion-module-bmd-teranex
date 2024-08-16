@@ -37,6 +37,228 @@ module.exports = {
 			},
 		}
 
+		//Noise Reduction Actions
+		actions.noisereduction_enabled = {
+			name: 'Noise Reduction - Enable Noise Reduction',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'NOISE REDUCTION:\nEnabled: ON\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_disabled = {
+			name: 'Noise Reduction - Disable Noise Reduction',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'NOISE REDUCTION:\nEnabled: OFF\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_bias_set = {
+			name: 'Noise Reduction - Set Noise Reduction Bias',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Bias',
+					id: 'bias',
+					default: '0',
+					tooltip: 'Value between -3 to +3',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				let bias = parseInt(await self.parseVariablesInString(action.options.bias))
+				cmd = 'NOISE REDUCTION:\nBias: ' + bias + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_bias_increase = {
+			name: 'Noise Reduction - Increase Noise Reduction Bias',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Bias Increase Value',
+					id: 'bias',
+					default: '0',
+					tooltip: 'Value between -3 to +3',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get current bias amount, or assume 0 if not found
+				let bias = parseInt(self.data.noiseReduction?.bias) || 0
+				//get the increase amount from the action options
+				let increase = parseInt(await self.parseVariablesInString(action.options.bias))
+				//add the increase amount to the current bias
+				bias += increase
+				cmd = 'NOISE REDUCTION:\nBias: ' + bias + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_bias_decrease = {
+			name: 'Noise Reduction - Decrease Noise Reduction Bias',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Bias Decrease Value',
+					id: 'bias',
+					default: '0',
+					tooltip: 'Value between -3 to +3',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get current bias amount, or assume 0 if not found
+				let bias = parseInt(self.data.noiseReduction?.bias) || 0
+				//get the decrease amount from the action options
+				let decrease = parseInt(await self.parseVariablesInString(action.options.bias))
+				//subtract the decrease amount from the current bias
+				bias -= decrease
+				cmd = 'NOISE REDUCTION:\nBias: ' + bias + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_splitscreen_enable = {
+			name: 'Noise Reduction - Enable Split Screen',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'NOISE REDUCTION:\nSplit screen: ON\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_splitscreen_disable = {
+			name: 'Noise Reduction - Disable Split Screen',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'NOISE REDUCTION:\nSplit screen: OFF\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_redoverlay_enable = {
+			name: 'Noise Reduction - Enable Red Overlay',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'NOISE REDUCTION:\nRed overlay: ON\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.noisereduction_redoverlay_disable = {
+			name: 'Noise Reduction - Disable Red Overlay',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'NOISE REDUCTION:\nRed overlay: OFF\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.videoadvanced_cleancadence_enable = {
+			name: 'Video Advanced - Enable Clean Cadence',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'VIDEO ADVANCED:\nClean cadence: ' + 'ON' + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.videoadvanced_cleancadence_disable = {
+			name: 'Video Advanced - Disable Clean Cadence',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'VIDEO ADVANCED:\nClean cadence: ' + 'OFF' + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.videoadvanced_scenecutdetect_enable = {
+			name: 'Video Advanced - Enable Scene Cut Detection',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'VIDEO ADVANCED:\nScenecut detect: ' + 'ON' + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.videoadvanced_scenecutdetect_disable = {
+			name: 'Video Advanced - Disable Scene Cut Detection',
+			options: [],
+			callback: function (action, bank) {
+				cmd = 'VIDEO ADVANCED:\nScenecut detect: ' + 'OFF' + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.videoadvanced_sourcetype = {
+			name: 'Video Advanced - Set Source Type',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Source Type',
+					id: 'sourceType',
+					default: 'Auto',
+					choices: [
+						{ id: 'Auto', label: 'Auto' },
+						{ id: 'Video', label: 'Video' },
+						{ id: 'Film', label: 'Film' },
+					],
+				},
+			],
+			callback: function (action, bank) {
+				cmd = 'VIDEO ADVANCED:\nSource type: ' + action.options.sourceType + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.videoadvanced_frcaperture = {
+			name: 'Video Advanced - Set FRC Aperture',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Aperture',
+					id: 'aperture',
+					default: '0',
+					choices: [
+						{ id: '0', label: '0' },
+						{ id: '1', label: '1' },
+						{ id: '2', label: '2' },
+						{ id: '3', label: '3' },
+					],
+				},
+			],
+			callback: function (action, bank) {
+				cmd = 'VIDEO ADVANCED:\nFRC aperture: ' + action.options.aperture + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.videoadvanced_processing = {
+			name: 'Video Advanced - Set Processing',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Processing',
+					id: 'processing',
+					default: 'Lowest Latency',
+					choices: [
+						{ id: 'Lowest Latency', label: 'Lowest Latency' },
+						{ id: 'Highest Quality', label: 'Highest Quality' },
+					],
+				},
+			],
+			callback: function (action, bank) {
+				cmd = 'VIDEO ADVANCED:\nProcessing: ' + action.options.processing + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		//Preset Actions
 		actions.recall_preset = {
 			name: 'Recall preset',
 			options: [
@@ -50,6 +272,23 @@ module.exports = {
 			],
 			callback: function (action, bank) {
 				cmd = 'PRESET:\nRecall:' + action.options.source + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.save_preset = {
+			name: 'Save preset',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Preset',
+					id: 'source',
+					default: '1',
+					choices: self.preset_sources,
+				},
+			],
+			callback: function (action, bank) {
+				cmd = 'PRESET:\nSave:' + action.options.source + '\n\n'
 				self.sendCommand(cmd)
 			},
 		}
@@ -111,7 +350,7 @@ module.exports = {
 		}
 
 		actions.output_display = {
-			name: 'Output display',
+			name: 'Video Output - Output display',
 			options: [
 				{
 					type: 'dropdown',
@@ -144,7 +383,7 @@ module.exports = {
 		}
 
 		actions.output_format = {
-			name: 'Output format',
+			name: 'Video Output - Output format',
 			options: [
 				{
 					type: 'dropdown',
@@ -161,7 +400,7 @@ module.exports = {
 		}
 
 		actions.variable_aspect_ratio = {
-			name: 'Variable aspect ratio',
+			name: 'Variable Aspect Ratio - Set all properties',
 			options: [
 				{
 					type: 'checkbox',
@@ -258,7 +497,7 @@ module.exports = {
 					label: 'Send Vertical Trim Property',
 					id: 'sendVerticalTrim',
 					default: true,
-				},				
+				},
 				{
 					type: 'textinput',
 					label: 'Vertical Trim',
@@ -287,48 +526,583 @@ module.exports = {
 				},
 			],
 			callback: async function (action, bank) {
-				cmd = 'VARIABLE ASPECT RATIO:' + '\n';
+				cmd = 'VARIABLE ASPECT RATIO:' + '\n'
 
 				if (action.options.sendHorizontalSize) {
-					let horizontalSize = await self.parseVariablesInString(action.options.horizontalSize);
-					cmd += 'Variable Aspect Ratio size X left:' + horizontalSize + '\n';
+					let horizontalSize = await self.parseVariablesInString(action.options.horizontalSize)
+					cmd += 'Variable Aspect Ratio size X left:' + horizontalSize + '\n'
 				}
 
 				if (action.options.sendVerticalSize) {
-					let verticalSize = await self.parseVariablesInString(action.options.verticalSize);
-					cmd += 'Variable Aspect Ratio size Y left:' + verticalSize + '\n';
+					let verticalSize = await self.parseVariablesInString(action.options.verticalSize)
+					cmd += 'Variable Aspect Ratio size Y left:' + verticalSize + '\n'
 				}
 
 				if (action.options.sendHorizontalPosition) {
-					let horizontalPosition = await self.parseVariablesInString(action.options.horizontalPosition);
-					cmd += 'Variable Aspect Ratio pos X left:' + horizontalPosition + '\n';
+					let horizontalPosition = await self.parseVariablesInString(action.options.horizontalPosition)
+					cmd += 'Variable Aspect Ratio pos X left:' + horizontalPosition + '\n'
 				}
 
 				if (action.options.sendVerticalPosition) {
-					let verticalPosition = await self.parseVariablesInString(action.options.verticalPosition);
-					cmd += 'Variable Aspect Ratio pos Y left:' + verticalPosition + '\n';
+					let verticalPosition = await self.parseVariablesInString(action.options.verticalPosition)
+					cmd += 'Variable Aspect Ratio pos Y left:' + verticalPosition + '\n'
 				}
 
 				if (action.options.sendHorizontalTrim) {
-					let horizontalTrim = await self.parseVariablesInString(action.options.horizontalTrim);
-					cmd += 'Variable Aspect Ratio trim X left:' + horizontalTrim + '\n';
+					let horizontalTrim = await self.parseVariablesInString(action.options.horizontalTrim)
+					cmd += 'Variable Aspect Ratio trim X left:' + horizontalTrim + '\n'
 				}
 
 				if (action.options.sendVerticalTrim) {
-					let verticalTrim = await self.parseVariablesInString(action.options.verticalTrim);
-					cmd += 'Variable Aspect Ratio trim Y left:' + verticalTrim + '\n';
+					let verticalTrim = await self.parseVariablesInString(action.options.verticalTrim)
+					cmd += 'Variable Aspect Ratio trim Y left:' + verticalTrim + '\n'
 				}
 
-				if (action.options.sendZoomCrop) cmd += 'Variable Aspect Ratio zoom/crop:' + action.options.zoomCrop + '\n';
+				if (action.options.sendZoomCrop) cmd += 'Variable Aspect Ratio zoom/crop:' + action.options.zoomCrop + '\n'
 
-				cmd += '\n';
+				cmd += '\n'
 
 				self.sendCommand(cmd)
 			},
 		}
 
+		//individual Variable Aspect commands
+		actions.variableaspectratio_horizontal_size = {
+			name: 'Variable Aspect Ratio - Set Horizontal Size',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
+				if (isNaN(value)) {
+					self.log('error', 'Variable Aspect Ratio Horizontal Size is not valid: ' + action.options.value)
+					return
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio size X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_size_increase = {
+			name: 'Variable Aspect Ratio - Increase Horizontal Size by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.sizeXLeft || 0
+
+				//get the increase amount from the action options
+				let increase = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//add the increase amount to the current value
+				value += increase
+
+				if (value > 9999) {
+					value = 9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio size X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_size_decrease = {
+			name: 'Variable Aspect Ratio - Decrease Horizontal Size by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.sizeXLeft || 0
+
+				//get the decrease amount from the action options
+				let decrease = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//subtract the decrease amount from the current value
+				value -= decrease
+
+				if (value < -9999) {
+					value = -9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio size X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_size = {
+			name: 'Variable Aspect Ratio - Set Vertical Size',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
+				if (isNaN(value)) {
+					self.log('error', 'Variable Aspect Ratio Vertical Size is not valid: ' + action.options.value)
+					return
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio size Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_size_increase = {
+			name: 'Variable Aspect Ratio - Increase Vertical Size by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.sizeYLeft || 0
+
+				//get the increase amount from the action options
+				let increase = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//add the increase amount to the current value
+				value += increase
+
+				if (value > 9999) {
+					value = 9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio size Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_size_decrease = {
+			name: 'Variable Aspect Ratio - Decrease Vertical Size by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.sizeYLeft || 0
+
+				//get the decrease amount from the action options
+				let decrease = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//subtract the decrease amount from the current value
+				value -= decrease
+
+				if (value < -9999) {
+					value = -9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio size Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_position = {
+			name: 'Variable Aspect Ratio - Set Horizontal Position',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
+				if (isNaN(value)) {
+					self.log('error', 'Variable Aspect Ratio Horizontal Position is not valid: ' + action.options.value)
+					return
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio pos X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_position_increase = {
+			name: 'Variable Aspect Ratio - Increase Horizontal Position by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.posXLeft || 0
+
+				//get the increase amount from the action options
+				let increase = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//add the increase amount to the current value
+				value += increase
+
+				if (value > 9999) {
+					value = 9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio pos X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_position_decrease = {
+			name: 'Variable Aspect Ratio - Decrease Horizontal Position by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.posXLeft || 0
+
+				//get the decrease amount from the action options
+				let decrease = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//subtract the decrease amount from the current value
+				value -= decrease
+
+				if (value < -9999) {
+					value = -9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio pos X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_position = {
+			name: 'Variable Aspect Ratio - Set Vertical Position',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
+				if (isNaN(value)) {
+					self.log('error', 'Variable Aspect Ratio Vertical Position is not valid: ' + action.options.value)
+					return
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio pos Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_position_increase = {
+			name: 'Variable Aspect Ratio - Increase Vertical Position by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.posYLeft || 0
+
+				//get the increase amount from the action options
+				let increase = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//add the increase amount to the current value
+				value += increase
+
+				if (value > 9999) {
+					value = 9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio pos Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_position_decrease = {
+			name: 'Variable Aspect Ratio - Decrease Vertical Position by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.posYLeft || 0
+
+				//get the decrease amount from the action options
+				let decrease = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//subtract the decrease amount from the current value
+				value -= decrease
+
+				if (value < -9999) {
+					value = -9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio pos Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_trim = {
+			name: 'Variable Aspect Ratio - Set Horizontal Trim',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between 0 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
+				if (isNaN(value)) {
+					self.log('error', 'Variable Aspect Ratio Horizontal Trim is not valid: ' + action.options.value)
+					return
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio trim X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_trim_increase = {
+			name: 'Variable Aspect Ratio - Increase Horizontal Trim by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.trimXLeft || 0
+
+				//get the increase amount from the action options
+				let increase = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//add the increase amount to the current value
+				value += increase
+
+				if (value > 9999) {
+					value = 9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio trim X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_horizontal_trim_decrease = {
+			name: 'Variable Aspect Ratio - Decrease Horizontal Trim by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.trimXLeft || 0
+
+				//get the decrease amount from the action options
+				let decrease = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//subtract the decrease amount from the current value
+				value -= decrease
+
+				if (value < -9999) {
+					value = -9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio trim X left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_trim = {
+			name: 'Variable Aspect Ratio - Set Vertical Trim',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between 0 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				let value = parseInt(await self.parseVariablesInString(action.options.value))
+				if (isNaN(value)) {
+					self.log('error', 'Variable Aspect Ratio Vertical Trim is not valid: ' + action.options.value)
+					return
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio trim Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_trim_increase = {
+			name: 'Variable Aspect Ratio - Increase Vertical Trim by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.trimYLeft || 0
+
+				//get the increase amount from the action options
+				let increase = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//add the increase amount to the current value
+				value += increase
+
+				if (value > 9999) {
+					value = 9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio trim Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_vertical_trim_decrease = {
+			name: 'Variable Aspect Ratio - Decrease Vertical Trim by X',
+			options: [
+				{
+					type: 'textinput',
+					label: 'Value',
+					id: 'value',
+					default: '0',
+					tooltip: 'Value between -9999 to 9999',
+					useVariables: true,
+				},
+			],
+			callback: async function (action, bank) {
+				//get existing value
+				let value = self.data.variableAspectRatio?.trimYLeft || 0
+
+				//get the decrease amount from the action options
+				let decrease = parseInt(await self.parseVariablesInString(action.options.value))
+
+				//subtract the decrease amount from the current value
+				value -= decrease
+
+				if (value < -9999) {
+					value = -9999
+				}
+
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio trim Y left:' + value + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		actions.variableaspectratio_zoomcrop = {
+			name: 'Variable Aspect Ratio - Set Zoom/Crop',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Zoom/Crop',
+					id: 'zoomCrop',
+					default: 'false',
+					choices: self.zoomCrop,
+				},
+			],
+			callback: function (action, bank) {
+				let cmd = 'VARIABLE ASPECT RATIO:\nVariable Aspect Ratio zoom/crop:' + action.options.zoomCrop + '\n\n'
+				self.sendCommand(cmd)
+			},
+		}
+
+		//Video Adjust actions
 		actions.videoadjust_red = {
-			name: 'Set Video Adjust Red Value',
+			name: 'Video Adjust - Set Red Value',
 			options: [
 				{
 					type: 'textinput',
@@ -357,7 +1131,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_red_increase = {
-			name: 'Increase Video Adjust Red Value by 1',
+			name: 'Video Adjust - Increase Red Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.red
@@ -374,7 +1148,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_red_decrease = {
-			name: 'Decrease Video Adjust Red Value by 1',
+			name: 'Video Adjust - Decrease Red Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.red
@@ -391,7 +1165,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_green = {
-			name: 'Set Video Adjust Green Value',
+			name: 'Video Adjust - Set Green Value',
 			options: [
 				{
 					type: 'textinput',
@@ -420,7 +1194,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_green_increase = {
-			name: 'Increase Video Adjust Green Value by 1',
+			name: 'Video Adjust - Increase Green Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.green
@@ -437,7 +1211,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_green_decrease = {
-			name: 'Decrease Video Adjust Green Value by 1',
+			name: 'Video Adjust - Decrease Green Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.green
@@ -454,7 +1228,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_blue = {
-			name: 'Set Video Adjust Blue Value',
+			name: 'Video Adjust - Set Blue Value',
 			options: [
 				{
 					type: 'textinput',
@@ -483,7 +1257,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_blue_increase = {
-			name: 'Increase Video Adjust Blue Value by 1',
+			name: 'Video Adjust - Increase Blue Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.blue
@@ -500,7 +1274,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_blue_decrease = {
-			name: 'Decrease Video Adjust Blue Value by 1',
+			name: 'Video Adjust - Decrease Blue Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.blue
@@ -517,7 +1291,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_lumalow = {
-			name: 'Set Video Adjust Luma Low Value',
+			name: 'Video Adjust - Set Luma Low Value',
 			options: [
 				{
 					type: 'textinput',
@@ -546,7 +1320,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_lumalow_increase = {
-			name: 'Increase Video Adjust Luma Low Value by 1',
+			name: 'Video Adjust - Increase Luma Low Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.luma_low
@@ -563,7 +1337,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_lumalow_decrease = {
-			name: 'Decrease Video Adjust Luma Low Value by 1',
+			name: 'Video Adjust - Decrease Luma Low Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.luma_low
@@ -580,7 +1354,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_lumahigh = {
-			name: 'Set Video Adjust Luma High Value',
+			name: 'Video Adjust - Set Luma High Value',
 			options: [
 				{
 					type: 'textinput',
@@ -609,7 +1383,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_lumahigh_increase = {
-			name: 'Increase Video Adjust Luma High Value by 1',
+			name: 'Video Adjust - Increase Luma High Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.luma_high
@@ -626,7 +1400,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_lumahigh_decrease = {
-			name: 'Decrease Video Adjust Luma High Value by 1',
+			name: 'Video Adjust - Decrease Luma High Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.luma_high
@@ -643,7 +1417,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_chromalow = {
-			name: 'Set Video Adjust Chroma Low Value',
+			name: 'Video Adjust - Set Chroma Low Value',
 			options: [
 				{
 					type: 'textinput',
@@ -672,7 +1446,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_chromalow_increase = {
-			name: 'Increase Video Adjust Chroma Low Value by 1',
+			name: 'Video Adjust - Increase Chroma Low Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.chroma_low
@@ -689,7 +1463,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_chromalow_decrease = {
-			name: 'Decrease Video Adjust Chroma Low Value by 1',
+			name: 'Video Adjust - Decrease Chroma Low Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.chroma_low
@@ -706,7 +1480,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_chromahigh = {
-			name: 'Set Video Adjust Chroma High Value',
+			name: 'Video Adjust - Set Chroma High Value',
 			options: [
 				{
 					type: 'textinput',
@@ -735,7 +1509,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_chromahigh_increase = {
-			name: 'Increase Video Adjust Chroma High Value by 1',
+			name: 'Video Adjust - Increase Chroma High Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.chroma_high
@@ -752,7 +1526,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_chromahigh_decrease = {
-			name: 'Decrease Video Adjust Chroma High Value by 1',
+			name: 'Video Adjust - Decrease Chroma High Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.chroma_high
@@ -769,7 +1543,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_luma = {
-			name: 'Set Video Adjust Aspect Fill Luma Value',
+			name: 'Video Adjust - Set Aspect Fill Luma Value',
 			options: [
 				{
 					type: 'textinput',
@@ -798,7 +1572,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_luma_increase = {
-			name: 'Increase Video Adjust Aspect Fill Luma Value by 1',
+			name: 'Video Adjust - Increase Aspect Fill Luma Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.aspect_fill_luma
@@ -815,7 +1589,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_luma_decrease = {
-			name: 'Decrease Video Adjust Aspect Fill Luma Value by 1',
+			name: 'Video Adjust - Decrease Aspect Fill Luma Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.aspect_fill_luma
@@ -832,7 +1606,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_cb = {
-			name: 'Set Video Adjust Aspect Fill Cb Value',
+			name: 'Video Adjust - Set Aspect Fill Cb Value',
 			options: [
 				{
 					type: 'textinput',
@@ -861,7 +1635,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_cb_increase = {
-			name: 'Increase Video Adjust Aspect Fill Cb Value by 1',
+			name: 'Video Adjust - Increase Aspect Fill Cb Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.aspect_fill_cb
@@ -878,7 +1652,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_cb_decrease = {
-			name: 'Decrease Video Adjust Aspect Fill Cb Value by 1',
+			name: 'Video Adjust - Decrease Aspect Fill Cb Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.aspect_fill_cb
@@ -895,7 +1669,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_cr = {
-			name: 'Set Video Adjust Aspect Fill Cr Value',
+			name: 'Video Adjust - Set Aspect Fill Cr Value',
 			options: [
 				{
 					type: 'textinput',
@@ -924,7 +1698,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_cr_increase = {
-			name: 'Increase Video Adjust Aspect Fill Cr Value by 1',
+			name: 'Video Adjust - Increase Aspect Fill Cr Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.aspect_fill_cr
@@ -941,7 +1715,7 @@ module.exports = {
 		}
 
 		actions.videoadjust_aspect_fill_cr_decrease = {
-			name: 'Decrease Video Adjust Aspect Fill Cr Value by 1',
+			name: 'Video Adjust - Decrease Aspect Fill Cr Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_adjust.aspect_fill_cr
@@ -958,7 +1732,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_gain = {
-			name: 'Set Video Proc Amp Gain Value',
+			name: 'Video Proc Amp - Set Gain Value',
 			options: [
 				{
 					type: 'textinput',
@@ -987,7 +1761,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_gain_increase = {
-			name: 'Increase Video Proc Amp Gain Value by 1',
+			name: 'Video Proc Amp - Increase Gain Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.gain
@@ -1004,7 +1778,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_gain_decrease = {
-			name: 'Decrease Video Proc Amp Gain Value by 1',
+			name: 'Video Proc Amp - Decrease Gain Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.gain
@@ -1021,7 +1795,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_black = {
-			name: 'Set Video Proc Amp Black Value',
+			name: 'Video Proc Amp - Set Black Value',
 			options: [
 				{
 					type: 'textinput',
@@ -1050,7 +1824,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_black_increase = {
-			name: 'Increase Video Proc Amp Black Value by 1',
+			name: 'Video Proc Amp - Increase Black Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.black
@@ -1067,7 +1841,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_black_decrease = {
-			name: 'Decrease Video Proc Amp Black Value by 1',
+			name: 'Video Proc Amp - Decrease Black Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.black
@@ -1084,7 +1858,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_saturation = {
-			name: 'Set Video Proc Saturation Gain Value',
+			name: 'Video Proc Amp - Set Saturation Gain Value',
 			options: [
 				{
 					type: 'textinput',
@@ -1113,7 +1887,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_saturation_increase = {
-			name: 'Increase Video Proc Amp Saturation Value by 1',
+			name: 'Video Proc Amp - Increase Saturation Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.saturation
@@ -1130,7 +1904,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_saturation_decrease = {
-			name: 'Decrease Video Proc Amp Saturation Value by 1',
+			name: 'Video Proc Amp - Decrease Saturation Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.saturation
@@ -1147,7 +1921,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_hue = {
-			name: 'Set Video Proc Amp Hue Value',
+			name: 'Video Proc Amp - Set Hue Value',
 			options: [
 				{
 					type: 'textinput',
@@ -1176,7 +1950,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_hue_increase = {
-			name: 'Increase Video Proc Amp Hue Value by 1',
+			name: 'Video Proc Amp - Increase Hue Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.hue
@@ -1193,7 +1967,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_hue_decrease = {
-			name: 'Decrease Video Proc Amp Hue Value by 1',
+			name: 'Video Proc Amp - Decrease Hue Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.hue
@@ -1210,7 +1984,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_ry = {
-			name: 'Set Video Proc Amp RY Value',
+			name: 'Video Proc Amp - Set RY Value',
 			options: [
 				{
 					type: 'textinput',
@@ -1239,7 +2013,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_ry_increase = {
-			name: 'Increase Video Proc Amp RY Value by 1',
+			name: 'Video Proc Amp - Increase RY Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.ry
@@ -1256,7 +2030,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_ry_decrease = {
-			name: 'Decrease Video Proc Amp RY Value by 1',
+			name: 'Video Proc Amp - Decrease RY Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.ry
@@ -1273,7 +2047,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_by = {
-			name: 'Set Video Proc Amp BY Value',
+			name: 'Video Proc Amp - Set Amp BY Value',
 			options: [
 				{
 					type: 'textinput',
@@ -1302,7 +2076,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_by_increase = {
-			name: 'Increase Video Proc Amp BY Value by 1',
+			name: 'Video Proc Amp - Increase BY Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.by
@@ -1319,7 +2093,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_by_decrease = {
-			name: 'Decrease Video Proc Amp BY Value by 1',
+			name: 'Video Proc Amp - Decrease BY Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.by
@@ -1336,7 +2110,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_sharp = {
-			name: 'Set Video Proc Amp Sharp Value',
+			name: 'Video Proc Amp - Set Sharp Value',
 			options: [
 				{
 					type: 'textinput',
@@ -1365,7 +2139,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_sharp_increase = {
-			name: 'Increase Video Proc Amp Sharp Value by 1',
+			name: 'Video Proc Amp - Increase Sharp Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.sharp
@@ -1382,7 +2156,7 @@ module.exports = {
 		}
 
 		actions.videoprocamp_sharp_decrease = {
-			name: 'Decrease Video Proc Amp Sharp Value by 1',
+			name: 'Video Proc Amp - Decrease Sharp Value by 1',
 			options: [],
 			callback: function (action, bank) {
 				let value = self.data.video_procamp.sharp
@@ -1420,7 +2194,7 @@ module.exports = {
 		}
 
 		actions.genlock_pixeloffset_increase = {
-			name: 'Increase Genlock Pixel Offset Value by X',
+			name: 'Genlock - Increase Pixel Offset Value by X',
 			options: [
 				{
 					type: 'textinput',
@@ -1463,7 +2237,7 @@ module.exports = {
 		}
 
 		actions.genlock_pixeloffset_decrease = {
-			name: 'Decrease Genlock Pixel Offset Value by X',
+			name: 'Genlock - Decrease Pixel Offset Value by X',
 			options: [
 				{
 					type: 'textinput',
@@ -1506,7 +2280,7 @@ module.exports = {
 		}
 
 		actions.genlock_pixeloffset_rangetop = {
-			name: 'Set Genlock Pixel Offset Value to Top of Range',
+			name: 'Genlock - Set Pixel Offset Value to Top of Range',
 			options: [],
 			callback: async function (action, bank) {
 				//find the min/max range out of the output_formats object
@@ -1524,7 +2298,7 @@ module.exports = {
 		}
 
 		actions.genlock_pixeloffset_rangebottom = {
-			name: 'Set Genlock Pixel Offset Value to Bottom of Range',
+			name: 'Genlock - Set Pixel Offset Value to Bottom of Range',
 			options: [],
 			callback: async function (action, bank) {
 				//find the min/max range out of the output_formats object
@@ -1542,7 +2316,7 @@ module.exports = {
 		}
 
 		actions.genlock_lineoffset_increase = {
-			name: 'Increase Genlock Line Offset Value by X',
+			name: 'Genlock - Increase Line Offset Value by X',
 			options: [
 				{
 					type: 'textinput',
@@ -1585,7 +2359,7 @@ module.exports = {
 		}
 
 		actions.genlock_lineoffset_decrease = {
-			name: 'Decrease Genlock Line Offset Value by X',
+			name: 'Genlock - Decrease Line Offset Value by X',
 			options: [
 				{
 					type: 'textinput',
@@ -1628,7 +2402,7 @@ module.exports = {
 		}
 
 		actions.genlock_lineoffset_rangetop = {
-			name: 'Set Genlock Line Offset Value to Top of Range',
+			name: 'Genlock - Set Line Offset Value to Top of Range',
 			options: [],
 			callback: async function (action, bank) {
 				//find the min/max range out of the output_formats object
@@ -1646,7 +2420,7 @@ module.exports = {
 		}
 
 		actions.genlock_lineoffset_rangebottom = {
-			name: 'Set Genlock Line Offset Value to Bottom of Range',
+			name: 'Genlock - Set Line Offset Value to Bottom of Range',
 			options: [],
 			callback: async function (action, bank) {
 				//find the min/max range out of the output_formats object

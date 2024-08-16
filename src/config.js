@@ -18,10 +18,17 @@ module.exports = {
 				regex: Regex.IP,
 			},
 			{
+				type: 'static-text',
+				id: 'hr',
+				width: 12,
+				label: '',
+				value: '<hr />',
+			},
+			{
 				type: 'checkbox',
 				id: 'debug',
 				width: 1,
-				label: 'Enable',
+				label: 'Enable Debug',
 				default: false,
 			},
 			{
