@@ -89,7 +89,7 @@ module.exports = {
 			},
 			options: [],
 			callback: async function (feedback, bank) {
-				if (self.data.noiseReduction.enabled) {
+				if (self.data.noiseReduction?.enabled) {
 					return true
 				}
 
@@ -107,7 +107,7 @@ module.exports = {
 			},
 			options: [],
 			callback: async function (feedback, bank) {
-				if (self.data.noiseReduction.splitscreen) {
+				if (self.data.noiseReduction?.splitscreen) {
 					return true
 				}
 
@@ -125,7 +125,7 @@ module.exports = {
 			},
 			options: [],
 			callback: async function (feedback, bank) {
-				if (self.data.noiseReduction.redoverlay) {
+				if (self.data.noiseReduction?.redoverlay) {
 					return true
 				}
 
@@ -144,7 +144,7 @@ module.exports = {
 			},
 			options: [],
 			callback: async function (feedback, bank) {
-				if (self.data.videoAdvanced.cleanCadence) {
+				if (self.data.videoAdvanced?.cleanCadence) {
 					return true
 				}
 
@@ -162,7 +162,7 @@ module.exports = {
 			},
 			options: [],
 			callback: async function (feedback, bank) {
-				if (self.data.videoAdvanced.scenecutDetect) {
+				if (self.data.videoAdvanced?.scenecutDetect) {
 					return true
 				}
 
@@ -180,7 +180,7 @@ module.exports = {
 			},
 			options: [],
 			callback: async function (feedback, bank) {
-				if (self.data.videoAdvanced.sourceType) {
+				if (self.data.videoAdvanced?.sourceType) {
 					return true
 				}
 
@@ -211,7 +211,7 @@ module.exports = {
 				},
 			],
 			callback: async function (feedback, bank) {
-				if (parseInt(self.data.videoAdvanced.frcAperture) === parseInt(feedback.options.frcAperture)) {
+				if (parseInt(self.data.videoAdvanced?.frcAperture) === parseInt(feedback.options.frcAperture)) {
 					return true
 				}
 
@@ -240,7 +240,7 @@ module.exports = {
 				},
 			],
 			callback: async function (feedback, bank) {
-				if (self.data.videoAdvanced.processing === feedback.options.processing) {
+				if (self.data.videoAdvanced?.processing === feedback.options.processing) {
 					return true
 				}
 

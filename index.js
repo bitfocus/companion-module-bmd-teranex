@@ -56,6 +56,34 @@ class teranexInstance extends InstanceBase {
 				pixeloffset: 0,
 				signallocked: '',
 			},
+			noiseReduction: {
+				enabled: false,
+				bias: 0,
+				splitScreen: false,
+				redOverlay: false
+			},
+			videoAdvanced: {
+				cleanCadence: false,
+				sceneCutDetect: false,
+				sourecType: '',
+				frcAperture: 0,
+				processing: ''
+			},
+			variableAspectRatio: {
+				sizeXLeft: 0,
+				sizeXRight: 0,
+				sizeYLeft: 0,
+				sizeYRight: 0,
+				posXLeft: 0,
+				posXRight: 0,
+				posYLeft: 0,
+				posYRight: 0,
+				trimXLeft: 0,
+				trimXRight: 0,
+				trimYLeft: 0,
+				trimYRight: 0,
+				zoomCrop: 0,
+			}
 		}
 
 		this.stash = []

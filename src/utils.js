@@ -251,19 +251,19 @@ module.exports = {
 			}
 
 			if (data['Enabled'] !== undefined) {
-				self.data.noiseReduction.enabled = data['Enabled'] == 'ON' ? true : false
+				self.data.noiseReduction?.enabled = data['Enabled'] == 'ON' ? true : false
 			}
 
 			if (data['Bias'] !== undefined) {
-				self.data.noiseReduction.bias = parseFloat(data['Bias'])
+				self.data.noiseReduction?.bias = parseFloat(data['Bias'])
 			}
 
 			if (data['Split screen'] !== undefined) {
-				self.data.noiseReduction.splitScreen = data['Split screen'] == 'ON' ? true : false
+				self.data.noiseReduction?.splitScreen = data['Split screen'] == 'ON' ? true : false
 			}
 
 			if (data['Red overlay'] !== undefined) {
-				self.data.noiseReduction.redOverlay = data['Red overlay'] == 'ON' ? true : false
+				self.data.noiseReduction?.redOverlay = data['Red overlay'] == 'ON' ? true : false
 			}
 		}
 
@@ -273,23 +273,23 @@ module.exports = {
 			}
 
 			if (data['Clean cadence'] !== undefined) {
-				self.data.videoAdvanced.cleanCadence = data['Clean cadence'] == 'ON' ? true : false
+				self.data.videoAdvanced?.cleanCadence = data['Clean cadence'] == 'ON' ? true : false
 			}
 
 			if (data['Scenecut detect'] !== undefined) {
-				self.data.videoAdvanced.sceneCutDetect = data['Scenecut detect'] == 'ON' ? true : false
+				self.data.videoAdvanced?.sceneCutDetect = data['Scenecut detect'] == 'ON' ? true : false
 			}
 
 			if (data['Source type'] !== undefined) {
-				self.data.videoAdvanced.sourceType = data['Source type']
+				self.data.videoAdvanced?.sourceType = data['Source type']
 			}
 
 			if (data['FRC aperture'] !== undefined) {
-				self.data.videoAdvanced.frcAperture = parseInt(data['FRC aperture'])
+				self.data.videoAdvanced?.frcAperture = parseInt(data['FRC aperture'])
 			}
 
 			if (data['Processing'] !== undefined) {
-				self.data.videoAdvanced.processing = data['Processing']
+				self.data.videoAdvanced?.processing = data['Processing']
 			}
 		}
 
@@ -299,55 +299,55 @@ module.exports = {
 			}
 
 			if (data['Variable Aspect Ratio size X left'] !== undefined) {
-				self.data.variableAspectRatio.sizeXLeft = parseInt(data['Variable Aspect Ratio size X left'])
+				self.data.variableAspectRatio?.sizeXLeft = parseInt(data['Variable Aspect Ratio size X left'])
 			}
 
 			if (data['Variable Aspect Ratio size X right'] !== undefined) {
-				self.data.variableAspectRatio.sizeXRight = parseInt(data['Variable Aspect Ratio size X right'])
+				self.data.variableAspectRatio?.sizeXRight = parseInt(data['Variable Aspect Ratio size X right'])
 			}
 
 			if (data['Variable Aspect Ratio size Y left'] !== undefined) {
-				self.data.variableAspectRatio.sizeYLeft = parseInt(data['Variable Aspect Ratio size Y left'])
+				self.data.variableAspectRatio?.sizeYLeft = parseInt(data['Variable Aspect Ratio size Y left'])
 			}
 
 			if (data['Variable Aspect Ratio size Y right'] !== undefined) {
-				self.data.variableAspectRatio.sizeYRight = parseInt(data['Variable Aspect Ratio size Y right'])
+				self.data.variableAspectRatio?.sizeYRight = parseInt(data['Variable Aspect Ratio size Y right'])
 			}
 
 			if (data['Variable Aspect Ratio pos X left'] !== undefined) {
-				self.data.variableAspectRatio.posXLeft = parseInt(data['Variable Aspect Ratio pos X left'])
+				self.data.variableAspectRatio?.posXLeft = parseInt(data['Variable Aspect Ratio pos X left'])
 			}
 
 			if (data['Variable Aspect Ratio pos X right'] !== undefined) {
-				self.data.variableAspectRatio.posXRight = parseInt(data['Variable Aspect Ratio pos X right'])
+				self.data.variableAspectRatio?.posXRight = parseInt(data['Variable Aspect Ratio pos X right'])
 			}
 
 			if (data['Variable Aspect Ratio pos Y left'] !== undefined) {
-				self.data.variableAspectRatio.posYLeft = parseInt(data['Variable Aspect Ratio pos Y left'])
+				self.data.variableAspectRatio?.posYLeft = parseInt(data['Variable Aspect Ratio pos Y left'])
 			}
 
 			if (data['Variable Aspect Ratio pos Y right'] !== undefined) {
-				self.data.variableAspectRatio.posYRight = parseInt(data['Variable Aspect Ratio pos Y right'])
+				self.data.variableAspectRatio?.posYRight = parseInt(data['Variable Aspect Ratio pos Y right'])
 			}
 
 			if (data['Variable Aspect Ratio trim X left'] !== undefined) {
-				self.data.variableAspectRatio.trimXLeft = parseInt(data['Variable Aspect Ratio trim X left'])
+				self.data.variableAspectRatio?.trimXLeft = parseInt(data['Variable Aspect Ratio trim X left'])
 			}
 
 			if (data['Variable Aspect Ratio trim X right'] !== undefined) {
-				self.data.variableAspectRatio.trimXRight = parseInt(data['Variable Aspect Ratio trim X right'])
+				self.data.variableAspectRatio?.trimXRight = parseInt(data['Variable Aspect Ratio trim X right'])
 			}
 
 			if (data['Variable Aspect Ratio trim Y left'] !== undefined) {
-				self.data.variableAspectRatio.trimYLeft = parseInt(data['Variable Aspect Ratio trim Y left'])
+				self.data.variableAspectRatio?.trimYLeft = parseInt(data['Variable Aspect Ratio trim Y left'])
 			}
 
 			if (data['Variable Aspect Ratio trim Y right'] !== undefined) {
-				self.data.variableAspectRatio.trimYRight = parseInt(data['Variable Aspect Ratio trim Y right'])
+				self.data.variableAspectRatio?.trimYRight = parseInt(data['Variable Aspect Ratio trim Y right'])
 			}
 
 			if (data['Variable Aspect Ratio zoom/crop'] !== undefined) {
-				self.data.variableAspectRatio.zoomCrop = parseInt(data['Variable Aspect Ratio zoom/crop'])
+				self.data.variableAspectRatio?.zoomCrop = parseInt(data['Variable Aspect Ratio zoom/crop'])
 			}
 		}
 

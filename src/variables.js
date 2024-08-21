@@ -105,35 +105,35 @@ module.exports = {
 			variableObj.genlock_type = self.data.genlock.type
 
 			//Noise Reduction Vars
-			variableObj.noise_reduction_enabled = self.data.noiseReduction.enabled ? 'ON' : 'OFF'
-			variableObj.noise_reduction_bias = self.data.noiseReduction.bias
-			variableObj.noise_reduction_splitscreen_enabled = self.data.noiseReduction.splitscreen ? 'ON' : 'OFF'
-			variableObj.noise_reduction_redoverlay_enabled = self.data.noiseReduction.redoverlay ? 'ON' : 'OFF'
+			variableObj.noise_reduction_enabled = self.data.noiseReduction?.enabled ? 'ON' : 'OFF'
+			variableObj.noise_reduction_bias = self.data.noiseReduction?.bias
+			variableObj.noise_reduction_splitscreen_enabled = self.data.noiseReduction?.splitscreen ? 'ON' : 'OFF'
+			variableObj.noise_reduction_redoverlay_enabled = self.data.noiseReduction?.redoverlay ? 'ON' : 'OFF'
 
 			//Video Advanced vars
-			variableObj.video_advanced_clean_cadence = self.data.videoAdvanced.cleanCadence ? 'ON' : 'OFF'
-			variableObj.video_advanced_scenecut_detect = self.data.videoAdvanced.sceneCutDetect ? 'ON' : 'OFF'
-			variableObj.video_advanced_source_type = self.data.videoAdvanced.sourceType
-			variableObj.video_advanced_frc_aperture = self.data.videoAdvanced.frcAperture
-			variableObj.video_advanced_processing = self.data.videoAdvanced.processing
+			variableObj.video_advanced_clean_cadence = self.data.videoAdvanced?.cleanCadence ? 'ON' : 'OFF'
+			variableObj.video_advanced_scenecut_detect = self.data.videoAdvanced?.sceneCutDetect ? 'ON' : 'OFF'
+			variableObj.video_advanced_source_type = self.data.videoAdvanced?.sourceType
+			variableObj.video_advanced_frc_aperture = self.data.videoAdvanced?.frcAperture
+			variableObj.video_advanced_processing = self.data.videoAdvanced?.processing
 
 			//Variable Aspect Ratio vars
-			variableObj.variableaspectratio_size_x_left = self.data.variableAspectRatio.sizeXLeft
-			variableObj.variableaspectratio_size_x_right = self.data.variableAspectRatio.sizeXRight
-			variableObj.variableaspectratio_size_y_left = self.data.variableAspectRatio.sizeYLeft
-			variableObj.variableaspectratio_size_y_right = self.data.variableAspectRatio.sizeYRight
+			variableObj.variableaspectratio_size_x_left = self.data.variableAspectRatio?.sizeXLeft
+			variableObj.variableaspectratio_size_x_right = self.data.variableAspectRatio?.sizeXRight
+			variableObj.variableaspectratio_size_y_left = self.data.variableAspectRatio?.sizeYLeft
+			variableObj.variableaspectratio_size_y_right = self.data.variableAspectRatio?.sizeYRight
 
-			variableObj.variableaspectratio_pos_x_left = self.data.variableAspectRatio.posXLeft
-			variableObj.variableaspectratio_pos_x_right = self.data.variableAspectRatio.posXRight
-			variableObj.variableaspectratio_pos_y_left = self.data.variableAspectRatio.posYLeft
-			variableObj.variableaspectratio_pos_y_right = self.data.variableAspectRatio.posYRight
+			variableObj.variableaspectratio_pos_x_left = self.data.variableAspectRatio?.posXLeft
+			variableObj.variableaspectratio_pos_x_right = self.data.variableAspectRatio?.posXRight
+			variableObj.variableaspectratio_pos_y_left = self.data.variableAspectRatio?.posYLeft
+			variableObj.variableaspectratio_pos_y_right = self.data.variableAspectRatio?.posYRight
 
-			variableObj.variableaspectratio_trim_x_left = self.data.variableAspectRatio.trimXLeft
-			variableObj.variableaspectratio_trim_x_right = self.data.variableAspectRatio.trimXRight
-			variableObj.variableaspectratio_trim_y_left = self.data.variableAspectRatio.trimYLeft
-			variableObj.variableaspectratio_trim_y_right = self.data.variableAspectRatio.trimYRight
+			variableObj.variableaspectratio_trim_x_left = self.data.variableAspectRatio?.trimXLeft
+			variableObj.variableaspectratio_trim_x_right = self.data.variableAspectRatio?.trimXRight
+			variableObj.variableaspectratio_trim_y_left = self.data.variableAspectRatio?.trimYLeft
+			variableObj.variableaspectratio_trim_y_right = self.data.variableAspectRatio?.trimYRight
 
-			variableObj.variableaspectratio_zoomcrop = self.data.variableAspectRatio.zoomCrop
+			variableObj.variableaspectratio_zoomcrop = self.data.variableAspectRatio?.zoomCrop
 
 			self.setVariableValues(variableObj)
 		} catch (error) {
